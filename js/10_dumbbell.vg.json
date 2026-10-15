@@ -63,57 +63,6 @@
    }
   },
   {
-   "mark": {
-    "type": "point",
-    "filled": true,
-    "size": 110
-   },
-   "encoding": {
-    "x": {
-     "field": "a",
-     "type": "quantitative"
-    },
-    "color": {
-     "value": "#999"
-    },
-    "tooltip": [
-     {
-      "field": "venue_or_activity",
-      "title": "Venue"
-     },
-     {
-      "field": "a",
-      "title": "2017-18 (%)"
-     },
-     {
-      "field": "b",
-      "title": "2021-22 (%)"
-     }
-    ]
-   }
-  },
-  {
-   "mark": {
-    "type": "point",
-    "filled": true,
-    "size": 110
-   },
-   "encoding": {
-    "x": {
-     "field": "b",
-     "type": "quantitative"
-    },
-    "color": {
-     "condition": {
-      "test": "datum.venue_or_activity == 'Libraries'",
-      "value": "#1f7a8c"
-     },
-     "value": "#d97b2c",
-     "legend": null
-    }
-   }
-  },
-  {
    "transform": [
     {
      "fold": [
@@ -122,27 +71,31 @@
      ],
      "as": [
       "period",
-      "value"
+      "attendance"
      ]
+    },
+    {
+     "calculate": "datum.period == 'a' ? 'Before (2017-18)' : 'After (2021-22)'",
+     "as": "period_label"
     }
    ],
    "mark": {
     "type": "point",
-    "opacity": 0
+    "filled": true,
+    "size": 110
    },
    "encoding": {
     "x": {
-     "field": "value",
+     "field": "attendance",
      "type": "quantitative"
     },
     "color": {
-     "field": "period",
+     "field": "period_label",
      "type": "nominal",
-     "title": "Survey period",
      "scale": {
       "domain": [
-       "a",
-       "b"
+       "Before (2017-18)",
+       "After (2021-22)"
       ],
       "range": [
        "#999999",
@@ -150,10 +103,70 @@
       ]
      },
      "legend": {
-      "labelExpr": "datum.label == 'a' ? '2017-18 (Before)' : '2021-22 (After)'",
+      "title": "Period",
       "orient": "top"
      }
+    },
+    "shape": {
+     "condition": {
+      "test": "datum.venue_or_activity == 'Libraries'",
+      "value": "diamond"
+     },
+     "value": "circle",
+     "legend": null
+    },
+    "tooltip": [
+     {
+      "field": "venue_or_activity",
+      "title": "Venue"
+     },
+     {
+      "field": "period_label",
+      "title": "Period"
+     },
+     {
+      "field": "attendance",
+      "title": "Attendance (%)",
+      "format": ".1f"
+     }
+    ]
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.venue_or_activity == 'Libraries'"
+    },
+    {
+     "calculate": "'Libraries'",
+     "as": "highlight"
     }
+   ],
+   "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 180,
+    "color": "#1f7a8c",
+    "shape": "diamond",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.5
+   },
+   "encoding": {
+    "x": {
+     "field": "b",
+     "type": "quantitative"
+    },
+    "tooltip": [
+     {
+      "field": "venue_or_activity",
+      "title": "Highlighted venue"
+     },
+     {
+      "field": "b",
+      "title": "2021-22 (%)",
+      "format": ".1f"
+     }
+    ]
    }
   }
  ],
@@ -186,7 +199,7 @@
   },
   "legend": {
    "labelFont": "Open Sans",
-   "titleFont": "Lora",
+   "titleFont": "Open Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600
