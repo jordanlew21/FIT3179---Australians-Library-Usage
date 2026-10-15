@@ -66,13 +66,15 @@
    "mark": {
     "type": "point",
     "filled": true,
-    "size": 110,
-    "color": "#999"
+    "size": 110
    },
    "encoding": {
     "x": {
      "field": "a",
      "type": "quantitative"
+    },
+    "color": {
+     "value": "#999"
     },
     "tooltip": [
      {
@@ -106,7 +108,51 @@
       "test": "datum.venue_or_activity == 'Libraries'",
       "value": "#1f7a8c"
      },
-     "value": "#d97b2c"
+     "value": "#d97b2c",
+     "legend": null
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "fold": [
+      "a",
+      "b"
+     ],
+     "as": [
+      "period",
+      "value"
+     ]
+    }
+   ],
+   "mark": {
+    "type": "point",
+    "opacity": 0
+   },
+   "encoding": {
+    "x": {
+     "field": "value",
+     "type": "quantitative"
+    },
+    "color": {
+     "field": "period",
+     "type": "nominal",
+     "title": "Survey period",
+     "scale": {
+      "domain": [
+       "a",
+       "b"
+      ],
+      "range": [
+       "#999999",
+       "#d97b2c"
+      ]
+     },
+     "legend": {
+      "labelExpr": "datum.label == 'a' ? '2017-18 (Before)' : '2021-22 (After)'",
+      "orient": "top"
+     }
     }
    }
   }
@@ -140,7 +186,7 @@
   },
   "legend": {
    "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "titleFont": "Lora",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600
