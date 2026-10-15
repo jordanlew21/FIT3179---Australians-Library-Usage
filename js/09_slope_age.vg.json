@@ -100,7 +100,7 @@
   {
    "transform": [
     {
-     "filter": "datum.year == '2019-20'"
+     "filter": "datum.year == '2017-18'"
     }
    ],
    "mark": {
@@ -136,7 +136,7 @@
   {
    "transform": [
     {
-     "filter": "datum.year == '2022-23'"
+     "filter": "datum.year == '2021-22'"
     }
    ],
    "mark": {
