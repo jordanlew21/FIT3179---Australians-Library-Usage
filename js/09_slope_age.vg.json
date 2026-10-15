@@ -18,19 +18,21 @@
   "x": {
    "field": "year",
    "type": "ordinal",
-   "title": null,
+   "title": "Year",
    "scale": {
     "padding": 0.9
    },
    "axis": {
     "labelAngle": 0,
-    "labelFontSize": 13
+    "labelFontSize": 13,
+    "labels": true,
+    "ticks": true
    }
   },
   "y": {
    "field": "percent",
    "type": "quantitative",
-   "title": "Percent who attended",
+   "title": "Attendance (%)",
    "scale": {
     "domain": [
      30,
@@ -91,8 +93,8 @@
      },
      {
       "field": "percent",
-      "title": "%",
-      "format": ".1f"
+      "title": "Attendance (%)",
+      "format": ".0f"
      }
     ]
    }
@@ -132,7 +134,7 @@
     "text": {
      "field": "percent",
      "type": "quantitative",
-     "format": ".1f"
+     "format": ".0f"
     }
    }
   },
@@ -171,7 +173,7 @@
     "text": {
      "field": "percent",
      "type": "quantitative",
-     "format": ".1f"
+     "format": ".0f"
     }
    }
   }
