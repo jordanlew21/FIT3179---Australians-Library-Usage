@@ -32,13 +32,15 @@
   "x": {
    "field": "year",
    "type": "ordinal",
-   "title": null,
+   "title": "Year",
    "scale": {
     "padding": 0.7
    },
    "axis": {
     "labelAngle": 0,
-    "labelFontSize": 13
+    "labelFontSize": 13,
+    "title": "Year",
+    "titleFontSize": 12
    }
   },
   "y": {
@@ -122,25 +124,6 @@
     "type": "text",
     "align": "left",
     "dx": 12,
-    "fontWeight": "bold",
-    "fontSize": 12
-   },
-   "encoding": {
-    "text": {
-     "field": "state"
-    }
-   }
-  },
-  {
-   "transform": [
-    {
-     "filter": "datum.year == '2021-22'"
-    }
-   ],
-   "mark": {
-    "type": "text",
-    "align": "right",
-    "dx": -12,
     "fontWeight": "bold",
     "fontSize": 12
    },
