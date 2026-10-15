@@ -91,7 +91,39 @@
      },
      {
       "field": "percent",
-      "title": "%"
+      "title": "%",
+      "format": ".1f"
+     }
+    ]
+   }
+  },
+  {
+   "mark": {
+    "type": "text",
+    "align": "center",
+    "baseline": "bottom",
+    "dy": -8,
+    "fontSize": 11,
+    "color": "#333"
+   },
+   "encoding": {
+    "text": {
+     "field": "percent",
+     "type": "quantitative",
+     "format": ".1f"
+    },
+    "tooltip": [
+     {
+      "field": "group",
+      "title": "Age"
+     },
+     {
+      "field": "year"
+     },
+     {
+      "field": "percent",
+      "title": "%",
+      "format": ".1f"
      }
     ]
    }
