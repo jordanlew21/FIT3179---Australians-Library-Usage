@@ -1,0 +1,159 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Adults who went to any cultural venue, by age",
+  "subtitle": "Percent of each age group; every group fell between the two surveys"
+ },
+ "width": "container",
+ "height": 360,
+ "data": {
+  "url": "data/abs_library_attendance.csv"
+ },
+ "transform": [
+  {
+   "filter": "datum.breakdown == 'Age group' && datum.venue_or_activity == 'At least one venue or event' && datum.group != 'Total' && datum.population == 'Adults (15+)'"
+  }
+ ],
+ "encoding": {
+  "x": {
+   "field": "year",
+   "type": "ordinal",
+   "title": null,
+   "scale": {
+    "padding": 0.9
+   },
+   "axis": {
+    "labelAngle": 0,
+    "labelFontSize": 13
+   }
+  },
+  "y": {
+   "field": "percent",
+   "type": "quantitative",
+   "title": "Percent who attended",
+   "scale": {
+    "domain": [
+     30,
+     100
+    ]
+   }
+  },
+  "color": {
+   "field": "group",
+   "type": "nominal",
+   "legend": null,
+   "scale": {
+    "scheme": "viridis"
+   }
+  }
+ },
+ "layer": [
+  {
+   "mark": {
+    "type": "line",
+    "strokeWidth": 2.5
+   },
+   "encoding": {
+    "detail": {
+     "field": "group"
+    }
+   }
+  },
+  {
+   "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 60
+   },
+   "encoding": {
+    "tooltip": [
+     {
+      "field": "group",
+      "title": "Age"
+     },
+     {
+      "field": "year"
+     },
+     {
+      "field": "percent",
+      "title": "%"
+     }
+    ]
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.year == '2021-22'"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "dx": 8,
+    "fontSize": 12
+   },
+   "encoding": {
+    "text": {
+     "field": "group"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.year == '2017-18'"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "align": "right",
+    "dx": -8,
+    "fontSize": 12
+   },
+   "encoding": {
+    "text": {
+     "field": "group"
+    }
+   }
+  }
+ ],
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}

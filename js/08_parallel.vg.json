@@ -1,0 +1,176 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Eight states across five measures",
+  "subtitle": "Each line is a state; each axis runs from the lowest to the highest state"
+ },
+ "width": "container",
+ "height": 340,
+ "data": {
+  "url": "data/states.csv"
+ },
+ "transform": [
+  {
+   "fold": [
+    "dig_share",
+    "online_share",
+    "visit_change",
+    "digital_change",
+    "programs_change"
+   ],
+   "as": [
+    "k",
+    "v"
+   ]
+  },
+  {
+   "joinaggregate": [
+    {
+     "op": "min",
+     "field": "v",
+     "as": "mn"
+    },
+    {
+     "op": "max",
+     "field": "v",
+     "as": "mx"
+    }
+   ],
+   "groupby": [
+    "k"
+   ]
+  },
+  {
+   "calculate": "(datum.v - datum.mn) / (datum.mx - datum.mn)",
+   "as": "n"
+  }
+ ],
+ "params": [
+  {
+   "name": "hl",
+   "select": {
+    "type": "point",
+    "fields": [
+     "state"
+    ]
+   },
+   "bind": "legend"
+  }
+ ],
+ "encoding": {
+  "x": {
+   "field": "k",
+   "type": "nominal",
+   "title": null,
+   "sort": [
+    "dig_share",
+    "online_share",
+    "visit_change",
+    "digital_change",
+    "programs_change"
+   ],
+   "axis": {
+    "orient": "top",
+    "labelAngle": 0,
+    "labelExpr": "{'dig_share':'Digital share','online_share':'Online visits','visit_change':'In-person visits','digital_change':'Digital use','programs_change':'Program participants'}[datum.value]",
+    "grid": true,
+    "gridColor": "#ccc",
+    "labelLimit": 110
+   }
+  },
+  "y": {
+   "field": "n",
+   "type": "quantitative",
+   "axis": null
+  },
+  "color": {
+   "field": "state",
+   "type": "nominal",
+   "title": "State",
+   "scale": {
+    "scheme": "category10"
+   }
+  },
+  "opacity": {
+   "condition": {
+    "param": "hl",
+    "value": 1
+   },
+   "value": 0.18
+  }
+ },
+ "layer": [
+  {
+   "mark": {
+    "type": "line",
+    "strokeWidth": 2.5
+   },
+   "encoding": {
+    "detail": {
+     "field": "state"
+    }
+   }
+  },
+  {
+   "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 50
+   },
+   "encoding": {
+    "tooltip": [
+     {
+      "field": "state"
+     },
+     {
+      "field": "k",
+      "title": "Measure"
+     },
+     {
+      "field": "v",
+      "title": "Value",
+      "format": ".1%"
+     }
+    ]
+   }
+  }
+ ],
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}

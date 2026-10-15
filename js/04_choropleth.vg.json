@@ -1,0 +1,189 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Share of library use that is digital, 2024-25",
+  "subtitle": "Click a state to highlight it"
+ },
+ "width": "container",
+ "height": 430,
+ "projection": {
+  "type": "conicEqualArea",
+  "parallels": [
+   -18,
+   -36
+  ],
+  "rotate": [
+   -132,
+   0
+  ]
+ },
+ "layer": [
+  {
+   "data": {
+    "url": "data/australia_states.topojson",
+    "format": {
+     "type": "topojson",
+     "feature": "australia_states"
+    }
+   },
+   "transform": [
+    {
+     "lookup": "properties.STATE_NAME",
+     "from": {
+      "data": {
+       "url": "data/states.csv"
+      },
+      "key": "state_name",
+      "fields": [
+       "state",
+       "dig_share"
+      ]
+     }
+    }
+   ],
+   "params": [
+    {
+     "name": "sel",
+     "select": {
+      "type": "point",
+      "fields": [
+       "state"
+      ]
+     }
+    }
+   ],
+   "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1.2
+   },
+   "encoding": {
+    "color": {
+     "field": "dig_share",
+     "type": "quantitative",
+     "title": "Digital share",
+     "scale": {
+      "type": "threshold",
+      "domain": [
+       0.3,
+       0.34,
+       0.38,
+       0.42
+      ],
+      "range": [
+       "#d7ecef",
+       "#a9d4da",
+       "#6fb5c0",
+       "#3a93a3",
+       "#1f6f7f"
+      ]
+     },
+     "legend": {
+      "format": ".0%",
+      "orient": "bottom-left"
+     }
+    },
+    "opacity": {
+     "condition": {
+      "param": "sel",
+      "value": 1
+     },
+     "value": 0.55
+    },
+    "tooltip": [
+     {
+      "field": "properties.STATE_NAME",
+      "title": "State"
+     },
+     {
+      "field": "dig_share",
+      "title": "Digital share",
+      "format": ".1%"
+     }
+    ]
+   }
+  },
+  {
+   "data": {
+    "url": "data/australia_states.topojson",
+    "format": {
+     "type": "topojson",
+     "feature": "australia_states"
+    }
+   },
+   "transform": [
+    {
+     "lookup": "properties.STATE_NAME",
+     "from": {
+      "data": {
+       "url": "data/states.csv"
+      },
+      "key": "state_name",
+      "fields": [
+       "state",
+       "label_lon",
+       "label_lat"
+      ]
+     }
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "fontWeight": "bold",
+    "color": "#222"
+   },
+   "encoding": {
+    "longitude": {
+     "field": "label_lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "label_lat",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "state"
+    }
+   }
+  }
+ ],
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}

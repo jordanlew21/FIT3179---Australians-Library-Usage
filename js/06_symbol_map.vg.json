@@ -1,0 +1,126 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Library branches per state, 2024-25",
+  "subtitle": "Each circle sits on the capital city but shows the whole state"
+ },
+ "width": "container",
+ "height": 430,
+ "projection": {
+  "type": "conicEqualArea",
+  "parallels": [
+   -18,
+   -36
+  ],
+  "rotate": [
+   -132,
+   0
+  ]
+ },
+ "layer": [
+  {
+   "data": {
+    "url": "data/australia_states.topojson",
+    "format": {
+     "type": "topojson",
+     "feature": "australia_states"
+    }
+   },
+   "mark": {
+    "type": "geoshape",
+    "fill": "#e4e0d8",
+    "stroke": "white"
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "mark": {
+    "type": "circle",
+    "opacity": 0.78,
+    "stroke": "white",
+    "strokeWidth": 1.5,
+    "color": "#8c6d46"
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "size": {
+     "field": "branches",
+     "type": "quantitative",
+     "title": "Branches",
+     "scale": {
+      "type": "sqrt",
+      "range": [
+       40,
+       2000
+      ]
+     },
+     "legend": {
+      "values": [
+       10,
+       100,
+       300
+      ],
+      "orient": "top-right"
+     }
+    },
+    "tooltip": [
+     {
+      "field": "state_name",
+      "title": "State"
+     },
+     {
+      "field": "branches",
+      "title": "Branches"
+     }
+    ]
+   }
+  }
+ ],
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}

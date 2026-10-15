@@ -1,0 +1,116 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "How often adult library visitors go",
+  "subtitle": "Share of library visitors, by number of visits in the year"
+ },
+ "width": "container",
+ "height": 150,
+ "data": {
+  "url": "data/abs_library_attendance.csv"
+ },
+ "transform": [
+  {
+   "filter": "datum.breakdown == 'Visits per year (attendees)' && datum.population == 'Adults (15+)'"
+  }
+ ],
+ "mark": {
+  "type": "bar",
+  "stroke": "white"
+ },
+ "encoding": {
+  "y": {
+   "field": "year",
+   "type": "nominal",
+   "title": null,
+   "axis": {
+    "labelFontSize": 13
+   }
+  },
+  "x": {
+   "field": "percent",
+   "type": "quantitative",
+   "stack": "normalize",
+   "title": null,
+   "axis": {
+    "format": "%"
+   }
+  },
+  "color": {
+   "field": "group",
+   "type": "nominal",
+   "title": "Visits a year",
+   "sort": [
+    "Once",
+    "2-10 times",
+    "11 or more times"
+   ],
+   "scale": {
+    "domain": [
+     "Once",
+     "2-10 times",
+     "11 or more times"
+    ],
+    "range": [
+     "#d7ecef",
+     "#6fb5c0",
+     "#1f6f7f"
+    ]
+   },
+   "legend": {
+    "orient": "top"
+   }
+  },
+  "tooltip": [
+   {
+    "field": "group",
+    "title": "Visits"
+   },
+   {
+    "field": "percent",
+    "title": "%"
+   },
+   {
+    "field": "year"
+   }
+  ]
+ },
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}

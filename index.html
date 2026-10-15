@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From the Shelf to the Screen | How Australians use libraries</title>
+<script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="page">
+
+<header class="hero">
+  <p class="kicker">Australian public libraries, 2017 to 2025</p>
+  <h1>From the Shelf to the Screen</h1>
+  <p class="dek">Australians have not stopped using libraries. They borrow differently, visit differently, and the pandemic changed who walks through the door.</p>
+</header>
+
+<section class="chapter">
+  <div class="pure-g">
+    <div class="pure-u-1-2 col-text"><div class="text">
+      <p class="kicker">The big picture</p>
+      <h2>One in three loans now happens on a screen</h2>
+      <p class="lead">In 2024-25, libraries across Australia recorded about 180 million loans. A <strong>digital loan</strong> means an e-book or audiobook borrowed on a phone, a streaming session, or a search of a library database.</p>
+      <p>Two thirds of all library use is still physical. But digital grew far faster, and the next chart shows how quickly.</p>
+    </div></div>
+    <div class="pure-u-1-2 col-vis"><div class="centre"><div id="vis1" class="vis-container"></div></div></div>
+  </div>
+</section>
+
+<section class="chapter">
+  <div class="text">
+    <p class="kicker">Chapter 1: The shift</p>
+    <h2>Digital borrowing rose by 42% in three years</h2>
+    <p class="lead">Between 2021-22 and 2024-25, physical loans grew from 103 million to 119 million. Digital use went from 43 million to 61 million, lifting its share of all library use from 30% to 34%.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis2" class="vis-container"></div></div></div>
+  <div class="text">
+    <h3>The doors reopened, and the website stayed busy</h3>
+    <p>Library visits collapsed during the pandemic, then recovered strongly. In-person visits rose from 56 million in 2021-22 to 91 million in 2024-25, higher than before the pandemic. Website visits also climbed, so many people now use both.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis3" class="vis-container"></div></div></div>
+</section>
+
+<section class="chapter">
+  <div class="text">
+    <p class="kicker">Chapter 2: Where</p>
+    <h2>Digital use depends on where you live</h2>
+    <p class="lead">The act has the highest digital share at 44%, and Victoria the lowest at 29%. Queensland is close to the top at 40%.</p>
+    <p class="note">The ACT is too small to see on this map. The tiles in the next chart show it clearly.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis4" class="vis-container"></div></div></div>
+  <div class="pure-g">
+    <div class="pure-u-1-2 col-vis"><div class="centre"><div id="vis5" class="vis-container"></div></div></div>
+    <div class="pure-u-1-2 col-text" style="padding-left:36px;padding-right:0"><div class="text">
+      <h3>Visits tell a different story</h3>
+      <p>In South Australia, 61% of library visits are to the website. In New South Wales it is 34%. Each state is drawn as an equal square so that small places are not lost.</p>
+    </div></div>
+  </div>
+  <div class="text">
+    <h3>Branches follow people</h3>
+    <p>New South Wales has 365 of Australia's 1,409 library branches, Queensland has 303 and Victoria 292. The ACT has 10.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis6" class="vis-container"></div></div></div>
+</section>
+
+<section class="chapter">
+  <div class="text">
+    <p class="kicker">Chapter 3: Change</p>
+    <h2>Every state changed, but not in the same way</h2>
+    <p class="lead">Comparing 2021-22 with 2024-25 shows where in-person visits bounced back, where digital grew fastest, and where programs expanded.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis7" class="vis-container"></div></div></div>
+  <div class="text">
+    <p class="note">Queensland stopped collecting from some small services, so its changes are not directly comparable. The ACT's website figure fell sharply because it counted its visits differently.</p>
+    <h3>Compare the states on five measures at once</h3>
+    <p>Each line is one state. Click a state in the legend to follow it across the axes.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis8" class="vis-container"></div></div></div>
+  <div class="text">
+    <h3>Who gained and lost ground on digital</h3>
+    <p>Rankings show who leans most on screens. A line that slopes upward means a state moved towards the top.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis12" class="vis-container"></div></div></div>
+</section>
+
+<section class="chapter">
+  <div class="text">
+    <p class="kicker">Chapter 4: The people</p>
+    <h2>Fewer Australians visit libraries than before the pandemic</h2>
+    <p class="lead">A national survey asks people whether they went to a venue in the last year. Library attendance among adults fell from 31% to 20% between 2017-18 and 2021-22, and among children from 53% to 33%.</p>
+    <p class="note">The 2021-22 survey covers July 2020 to June 2022, so lockdowns affect these figures.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis9" class="vis-container"></div></div></div>
+  <div class="text">
+    <h3>Libraries held up better than most venues</h3>
+    <p>Cinemas and live music lost more than 20 percentage points. Libraries lost about 10. Among Australians aged 75 and over, libraries became the most visited venue of all.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis10" class="vis-container"></div></div></div>
+  <div class="text">
+    <h3>The regulars are still there</h3>
+    <p>A quarter of adult library visitors went eleven or more times in 2021-22, down from a third in 2017-18. Women visit more than men: 25% of women went to a library, against 16% of men.</p>
+  </div>
+  <div class="pure-g"><div class="pure-u-1-1"><div id="vis11" class="vis-container"></div></div></div>
+  <p class="callout">Fewer people visit, but those who do borrow more, and they increasingly borrow on a screen.</p>
+</section>
+
+<footer class="about">
+  <h2>About this visualisation</h2>
+  <h3>Why and who</h3>
+  <p>This page is for Australians curious about how libraries are changing. It explains the shift from print to digital and the effect of the pandemic, without needing any statistics knowledge.</p>
+  <h3>What: the data</h3>
+  <ul>
+    <li><strong>Library activity:</strong> National and State Libraries Australasia (NSLA) and ALIA, <a href="https://www.nsla.org.au/Resources/Australian-Public-Libraries-Statistical-Report-24-25_FINAL_Published.pdf" target="_blank">Australian Public Libraries Statistical Report 2024-25</a> and <a href="https://www.nsla.org.au/wp-content/uploads/PLS-2021-22-final.pdf" target="_blank">2021-22</a>. CC BY 4.0. Tables were copied from the PDFs into CSV files.</li>
+    <li><strong>Who visits:</strong> Australian Bureau of Statistics, <a href="https://www.abs.gov.au/statistics/people/people-and-communities/cultural-and-creative-activities/2021-22" target="_blank">Cultural and creative activities 2021-22</a> and <a href="https://www.abs.gov.au/statistics/people/people-and-communities/attendance-selected-cultural-venues-and-events-australia/latest-release" target="_blank">Attendance at Selected Cultural Venues and Events 2017-18</a>.</li>
+    <li><strong>Boundaries:</strong> state outlines from anthwri/GeoJson-Data on GitHub, converted to TopoJSON.</li>
+  </ul>
+  <h3>How: the charts</h3>
+  <p>Twelve charts built with Vega-Lite: a waffle chart, streamgraph, connected scatterplot, three maps (choropleth, tile grid, proportional symbols), heatmap, parallel coordinates, bump chart, slope chart, dumbbell chart and stacked bar. Each chart's specification is in the <code>js</code> folder.</p>
+  <h3>Cautions</h3>
+  <ul>
+    <li>The two sources measure different things: libraries count loans and visits, the survey counts people who visited at least once. They are shown side by side, not combined.</li>
+    <li>Library digital use here includes e-book and audiobook loans, streaming and database sessions.</li>
+    <li>States run libraries differently, so comparisons between them need care. Survey figures are estimates from a sample.</li>
+  </ul>
+  <p><strong>Author and date:</strong> add your name and the date here. <strong>AI tools:</strong> state which parts were made with an AI assistant. Layout and chart techniques follow the <a href="https://fit3179.github.io/Vega-Lite/" target="_blank">FIT3179 Vega-Lite examples</a>.</p>
+</footer>
+
+</div>
+<script>
+var specs = ["01_waffle","02_streamgraph","03_connected_scatter","04_choropleth","05_tile_grid","06_symbol_map","07_heatmap","08_parallel","12_bump","09_slope_age","10_dumbbell","11_frequency"];
+var ids = [1,2,3,4,5,6,7,8,12,9,10,11];
+specs.forEach(function (s, i) { vegaEmbed("#vis" + ids[i], "js/" + s + ".vg.json", { actions: false }).catch(console.error); });
+</script>
+</body>
+</html>

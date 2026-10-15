@@ -1,0 +1,142 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Visits in person and online, 2020-21 to 2024-25",
+  "subtitle": "Millions of visits a year; the path starts in the pandemic"
+ },
+ "width": "container",
+ "height": 320,
+ "data": {
+  "url": "data/national_5yr_trend.csv"
+ },
+ "transform": [
+  {
+   "filter": "datum.measure == 'Library visits (physical facilities)' || datum.measure == 'Website visits'"
+  },
+  {
+   "calculate": "indexof(datum.measure, 'Website') == 0 ? 'Web' : 'Physical'",
+   "as": "kind"
+  },
+  {
+   "pivot": "kind",
+   "value": "value",
+   "groupby": [
+    "year"
+   ]
+  },
+  {
+   "calculate": "toNumber(datum.Physical) / 1000000",
+   "as": "p"
+  },
+  {
+   "calculate": "toNumber(datum.Web) / 1000000",
+   "as": "wv"
+  }
+ ],
+ "encoding": {
+  "x": {
+   "field": "p",
+   "type": "quantitative",
+   "title": "In-person visits (millions)",
+   "scale": {
+    "zero": false
+   }
+  },
+  "y": {
+   "field": "wv",
+   "type": "quantitative",
+   "title": "Website visits (millions)",
+   "scale": {
+    "zero": false
+   }
+  },
+  "order": {
+   "field": "year"
+  }
+ },
+ "layer": [
+  {
+   "mark": {
+    "type": "line",
+    "color": "#aaa",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 90,
+    "color": "#1f7a8c"
+   },
+   "encoding": {
+    "tooltip": [
+     {
+      "field": "year"
+     },
+     {
+      "field": "p",
+      "title": "In person (m)",
+      "format": ".1f"
+     },
+     {
+      "field": "wv",
+      "title": "Website (m)",
+      "format": ".1f"
+     }
+    ]
+   }
+  },
+  {
+   "mark": {
+    "type": "text",
+    "dy": -14,
+    "fontSize": 12,
+    "fontWeight": "bold"
+   },
+   "encoding": {
+    "text": {
+     "field": "year"
+    }
+   }
+  }
+ ],
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}

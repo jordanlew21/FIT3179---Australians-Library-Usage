@@ -1,0 +1,152 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Venues adults visited, 2017-18 and 2021-22",
+  "subtitle": "Libraries held up better than cinemas and live music"
+ },
+ "width": "container",
+ "height": 330,
+ "data": {
+  "url": "data/abs_library_attendance.csv"
+ },
+ "transform": [
+  {
+   "filter": "datum.breakdown == 'Venue' && datum.population == 'Adults (15+)'"
+  },
+  {
+   "pivot": "year",
+   "value": "percent",
+   "groupby": [
+    "venue_or_activity"
+   ]
+  },
+  {
+   "calculate": "datum['2017-18']",
+   "as": "a"
+  },
+  {
+   "calculate": "datum['2021-22']",
+   "as": "b"
+  }
+ ],
+ "encoding": {
+  "y": {
+   "field": "venue_or_activity",
+   "type": "nominal",
+   "title": null,
+   "sort": {
+    "op": "max",
+    "field": "a",
+    "order": "descending"
+   },
+   "axis": {
+    "labelLimit": 220
+   }
+  }
+ },
+ "layer": [
+  {
+   "mark": {
+    "type": "rule",
+    "strokeWidth": 3,
+    "color": "#cfcfcf"
+   },
+   "encoding": {
+    "x": {
+     "field": "a",
+     "type": "quantitative",
+     "title": "Percent of adults who attended"
+    },
+    "x2": {
+     "field": "b"
+    }
+   }
+  },
+  {
+   "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 110,
+    "color": "#999"
+   },
+   "encoding": {
+    "x": {
+     "field": "a",
+     "type": "quantitative"
+    },
+    "tooltip": [
+     {
+      "field": "venue_or_activity",
+      "title": "Venue"
+     },
+     {
+      "field": "a",
+      "title": "2017-18 (%)"
+     },
+     {
+      "field": "b",
+      "title": "2021-22 (%)"
+     }
+    ]
+   }
+  },
+  {
+   "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 110
+   },
+   "encoding": {
+    "x": {
+     "field": "b",
+     "type": "quantitative"
+    },
+    "color": {
+     "condition": {
+      "test": "datum.venue_or_activity == 'Libraries'",
+      "value": "#1f7a8c"
+     },
+     "value": "#d97b2c"
+    }
+   }
+  }
+ ],
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}

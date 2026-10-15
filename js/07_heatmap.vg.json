@@ -1,0 +1,139 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "How each state changed between 2021-22 and 2024-25",
+  "subtitle": "Percent change; orange is growth, blue is decline"
+ },
+ "width": "container",
+ "height": 330,
+ "data": {
+  "url": "data/state_change.csv"
+ },
+ "encoding": {
+  "x": {
+   "field": "measure",
+   "type": "nominal",
+   "title": null,
+   "sort": [
+    "Physical visits",
+    "Website visits",
+    "Digital use",
+    "Program participants",
+    "Opening hours"
+   ],
+   "axis": {
+    "orient": "top",
+    "labelAngle": 0,
+    "labelLimit": 120
+   }
+  },
+  "y": {
+   "field": "state",
+   "type": "nominal",
+   "title": null,
+   "sort": [
+    "NSW",
+    "VIC",
+    "QLD",
+    "SA",
+    "WA",
+    "TAS",
+    "NT",
+    "ACT"
+   ]
+  }
+ },
+ "layer": [
+  {
+   "mark": "rect",
+   "encoding": {
+    "color": {
+     "field": "change",
+     "type": "quantitative",
+     "title": "Change",
+     "scale": {
+      "scheme": "blueorange",
+      "domain": [
+       -1,
+       1
+      ],
+      "domainMid": 0
+     },
+     "legend": {
+      "format": ".0%"
+     }
+    },
+    "tooltip": [
+     {
+      "field": "state"
+     },
+     {
+      "field": "measure"
+     },
+     {
+      "field": "change",
+      "format": ".0%"
+     }
+    ]
+   }
+  },
+  {
+   "mark": {
+    "type": "text",
+    "fontSize": 12
+   },
+   "encoding": {
+    "text": {
+     "field": "change",
+     "type": "quantitative",
+     "format": "+.0%"
+    },
+    "color": {
+     "condition": {
+      "test": "abs(datum.change) > 0.6",
+      "value": "white"
+     },
+     "value": "#222"
+    }
+   }
+  }
+ ],
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}

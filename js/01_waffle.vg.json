@@ -1,0 +1,109 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Of every 100 library loans in 2024-25",
+  "subtitle": "66 were physical items and 34 were digital"
+ },
+ "width": 300,
+ "height": 300,
+ "data": {
+  "sequence": {
+   "start": 0,
+   "stop": 100,
+   "as": "i"
+  }
+ },
+ "transform": [
+  {
+   "calculate": "datum.i % 10",
+   "as": "col"
+  },
+  {
+   "calculate": "floor(datum.i / 10)",
+   "as": "row"
+  },
+  {
+   "calculate": "datum.i < 66 ? 'Physical' : 'Digital'",
+   "as": "kind"
+  }
+ ],
+ "mark": {
+  "type": "square",
+  "size": 620
+ },
+ "encoding": {
+  "x": {
+   "field": "col",
+   "type": "ordinal",
+   "axis": null
+  },
+  "y": {
+   "field": "row",
+   "type": "ordinal",
+   "axis": null
+  },
+  "color": {
+   "field": "kind",
+   "type": "nominal",
+   "title": null,
+   "scale": {
+    "domain": [
+     "Physical",
+     "Digital"
+    ],
+    "range": [
+     "#8c6d46",
+     "#1f7a8c"
+    ]
+   },
+   "legend": {
+    "orient": "bottom",
+    "symbolType": "square"
+   }
+  },
+  "tooltip": [
+   {
+    "field": "kind",
+    "title": "Loan type"
+   }
+  ]
+ },
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}
