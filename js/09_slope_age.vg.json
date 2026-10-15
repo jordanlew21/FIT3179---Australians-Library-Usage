@@ -38,21 +38,21 @@
     ]
    }
   },
-    "color": {
-    "field": "group",
-    "type": "nominal",
-    "title": "Age group",
-    "scale": {
-        "scheme": "viridis"
-    },
-    "legend": {
-        "orient": "right",
-        "titleFontSize": 12,
-        "labelFontSize": 12,
-        "symbolType": "stroke",
-        "symbolStrokeWidth": 3
-    }
-    }
+  "color": {
+   "field": "group",
+   "type": "nominal",
+   "title": "Age group",
+   "scale": {
+    "scheme": "viridis"
+   },
+   "legend": {
+    "orient": "right",
+    "titleFontSize": 12,
+    "labelFontSize": 12,
+    "symbolType": "stroke",
+    "symbolStrokeWidth": 3
+   }
+  }
  },
  "layer": [
   {
@@ -86,42 +86,6 @@
       "title": "%"
      }
     ]
-   }
-  },
-  {
-   "transform": [
-    {
-     "filter": "datum.year == '2021-22'"
-    }
-   ],
-   "mark": {
-    "type": "text",
-    "align": "left",
-    "dx": 8,
-    "fontSize": 12
-   },
-   "encoding": {
-    "text": {
-     "field": "group"
-    }
-   }
-  },
-  {
-   "transform": [
-    {
-     "filter": "datum.year == '2017-18'"
-    }
-   ],
-   "mark": {
-    "type": "text",
-    "align": "right",
-    "dx": -8,
-    "fontSize": 12
-   },
-   "encoding": {
-    "text": {
-     "field": "group"
-    }
    }
   }
  ],
