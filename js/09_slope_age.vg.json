@@ -27,8 +27,7 @@
     "ticks": true,
     "labelAngle": 0,
     "labelFontSize": 13,
-    "labelOverlap": false,
-    "format": "d"
+    "labelOverlap": false
    }
   },
   "y": {
