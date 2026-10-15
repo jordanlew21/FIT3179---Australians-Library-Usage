@@ -37,21 +37,6 @@
      100
     ]
    }
-  },
-  "color": {
-   "field": "group",
-   "type": "nominal",
-   "title": "Age group",
-   "scale": {
-    "scheme": "viridis"
-   },
-   "legend": {
-    "orient": "right",
-    "titleFontSize": 12,
-    "labelFontSize": 12,
-    "symbolType": "stroke",
-    "symbolStrokeWidth": 3
-   }
   }
  },
  "layer": [
@@ -61,6 +46,21 @@
     "strokeWidth": 2.5
    },
    "encoding": {
+    "color": {
+     "field": "group",
+     "type": "nominal",
+     "title": "Age group",
+     "scale": {
+      "scheme": "viridis"
+     },
+     "legend": {
+      "orient": "right",
+      "titleFontSize": 12,
+      "labelFontSize": 12,
+      "symbolType": "stroke",
+      "symbolStrokeWidth": 3
+     }
+    },
     "detail": {
      "field": "group"
     }
@@ -73,6 +73,14 @@
     "size": 60
    },
    "encoding": {
+    "color": {
+     "field": "group",
+     "type": "nominal",
+     "scale": {
+      "scheme": "viridis"
+     },
+     "legend": null
+    },
     "tooltip": [
      {
       "field": "group",
@@ -89,6 +97,11 @@
    }
   }
  ],
+ "resolve": {
+  "scale": {
+   "color": "shared"
+  }
+ },
  "config": {
   "font": "Open Sans",
   "view": {
@@ -118,7 +131,7 @@
   },
   "legend": {
    "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "titleFont": "Lora",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600
