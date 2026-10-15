@@ -23,10 +23,12 @@
     "padding": 0.9
    },
    "axis": {
+    "labels": true,
+    "ticks": true,
     "labelAngle": 0,
     "labelFontSize": 13,
-    "labels": true,
-    "ticks": true
+    "labelOverlap": false,
+    "format": "d"
    }
   },
   "y": {
@@ -38,6 +40,10 @@
      30,
      100
     ]
+   },
+   "axis": {
+    "labels": true,
+    "title": "Attendance (%)"
    }
   }
  },
