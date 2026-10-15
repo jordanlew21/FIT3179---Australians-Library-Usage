@@ -100,7 +100,24 @@
   {
    "transform": [
     {
-     "filter": "datum.year == '2017-18'"
+     "window": [
+      {
+       "op": "row_number",
+       "as": "year_order"
+      }
+     ],
+     "sort": [
+      {
+       "field": "year",
+       "order": "ascending"
+      }
+     ],
+     "groupby": [
+      "group"
+     ]
+    },
+    {
+     "filter": "datum.year_order == 1"
     }
    ],
    "mark": {
@@ -116,27 +133,30 @@
      "field": "percent",
      "type": "quantitative",
      "format": ".1f"
-    },
-    "tooltip": [
-     {
-      "field": "group",
-      "title": "Age"
-     },
-     {
-      "field": "year"
-     },
-     {
-      "field": "percent",
-      "title": "%",
-      "format": ".1f"
-     }
-    ]
+    }
    }
   },
   {
    "transform": [
     {
-     "filter": "datum.year == '2021-22'"
+     "window": [
+      {
+       "op": "row_number",
+       "as": "year_order"
+      }
+     ],
+     "sort": [
+      {
+       "field": "year",
+       "order": "descending"
+      }
+     ],
+     "groupby": [
+      "group"
+     ]
+    },
+    {
+     "filter": "datum.year_order == 1"
     }
    ],
    "mark": {
@@ -152,21 +172,7 @@
      "field": "percent",
      "type": "quantitative",
      "format": ".1f"
-    },
-    "tooltip": [
-     {
-      "field": "group",
-      "title": "Age"
-     },
-     {
-      "field": "year"
-     },
-     {
-      "field": "percent",
-      "title": "%",
-      "format": ".1f"
-     }
-    ]
+    }
    }
   }
  ],
