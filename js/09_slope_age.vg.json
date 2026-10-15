@@ -38,14 +38,21 @@
     ]
    }
   },
-  "color": {
-   "field": "group",
-   "type": "nominal",
-   "legend": null,
-   "scale": {
-    "scheme": "viridis"
-   }
-  }
+    "color": {
+    "field": "group",
+    "type": "nominal",
+    "title": "Age group",
+    "scale": {
+        "scheme": "viridis"
+    },
+    "legend": {
+        "orient": "right",
+        "titleFontSize": 12,
+        "labelFontSize": 12,
+        "symbolType": "stroke",
+        "symbolStrokeWidth": 3
+    }
+    }
  },
  "layer": [
   {
