@@ -1,8 +1,8 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "Venues adults visited, 2017-18 and 2021-22.",
-  "subtitle": "Percent of adults; labels show relative change"
+  "text": "Venues adults visited, 2017-18 and 2021-22",
+  "subtitle": "Dots show the share of adults who attended; line colour shows how much of the audience was lost"
  },
  "width": "container",
  "height": 330,
@@ -31,6 +31,10 @@
   {
    "calculate": "datum.b / datum.a - 1",
    "as": "rel"
+  },
+  {
+   "calculate": "datum.rel <= -0.45 ? 'Audience fell by about half' : 'Audience fell by about a third'",
+   "as": "drop"
   }
  ],
  "encoding": {
@@ -52,8 +56,7 @@
   {
    "mark": {
     "type": "rule",
-    "strokeWidth": 3,
-    "color": "#cfcfcf"
+    "strokeWidth": 5
    },
    "encoding": {
     "x": {
@@ -69,7 +72,48 @@
     },
     "x2": {
      "field": "b"
-    }
+    },
+    "color": {
+     "field": "drop",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "Audience fell by about a third",
+       "Audience fell by about half"
+      ],
+      "range": [
+       "#a9cbe0",
+       "#2f6f8f"
+      ]
+     },
+     "legend": {
+      "title": "Change since 2017-18",
+      "orient": "top",
+      "symbolType": "stroke",
+      "symbolStrokeWidth": 5
+     }
+    },
+    "tooltip": [
+     {
+      "field": "venue_or_activity",
+      "title": "Venue"
+     },
+     {
+      "field": "a",
+      "title": "2017-18 (%)",
+      "format": ".1f"
+     },
+     {
+      "field": "b",
+      "title": "2021-22 (%)",
+      "format": ".1f"
+     },
+     {
+      "field": "rel",
+      "title": "Change in audience",
+      "format": "+.0%"
+     }
+    ]
    }
   },
   {
@@ -178,39 +222,6 @@
      }
     ]
    }
-  },
-  {
-   "mark": {
-    "type": "text",
-    "align": "left",
-    "dx": 14,
-    "fontSize": 12,
-    "fontWeight": "bold"
-   },
-   "encoding": {
-    "x": {
-     "field": "a",
-     "type": "quantitative",
-     "scale": {
-      "domain": [
-       0,
-       80
-      ]
-     }
-    },
-    "text": {
-     "field": "rel",
-     "type": "quantitative",
-     "format": "+.0%"
-    },
-    "color": {
-     "condition": {
-      "test": "datum.venue_or_activity == 'Libraries'",
-      "value": "#1f7a8c"
-     },
-     "value": "#444"
-    }
-   }
   }
  ],
  "config": {
@@ -249,6 +260,11 @@
   },
   "text": {
    "font": "Open Sans"
+  }
+ },
+ "resolve": {
+  "scale": {
+   "color": "independent"
   }
  }
 }
