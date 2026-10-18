@@ -1,7 +1,7 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "How each state changed between 2021-22 and 2024-25",
+  "text": "How each state changed between 2021-22 and 2024-25.",
   "subtitle": "Change from 2021-22; darkest orange means over +100%"
  },
  "width": "container",
