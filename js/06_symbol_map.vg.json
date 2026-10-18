@@ -1,7 +1,7 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "Library branches per state, 2024-25",
+  "text": "Library branches per state, 2024-25.",
   "subtitle": "Circle area is proportional to branches"
  },
  "width": "container",
