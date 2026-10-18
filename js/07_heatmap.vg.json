@@ -1,14 +1,20 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "How each state changed between 2021-22 and 2024-25.",
-  "subtitle": "Change from 2021-22; darkest orange means over +100%"
+  "text": "How each state changed between 2021-22 and 2024-25",
+  "subtitle": "Blue = decrease, orange = increase; the darkest orange is +100% or more"
  },
  "width": "container",
  "height": 330,
  "data": {
   "url": "data/state_change.csv"
  },
+ "transform": [
+  {
+   "calculate": "datum.change < -0.5 ? 'Below -50%' : datum.change < -0.2 ? '-50% to -20%' : datum.change < -0.05 ? '-20% to -5%' : datum.change < 0.05 ? '-5% to +5%' : datum.change < 0.2 ? '+5% to +20%' : datum.change < 0.5 ? '+20% to +50%' : datum.change < 1.0 ? '+50% to +100%' : '+100% or more'",
+   "as": "band"
+  }
+ ],
  "encoding": {
   "x": {
    "field": "measure",
@@ -48,36 +54,37 @@
    "mark": "rect",
    "encoding": {
     "color": {
-     "field": "change",
-     "type": "quantitative",
-     "title": "Change",
+     "field": "band",
+     "type": "ordinal",
+     "title": "Change since 2021-22",
      "scale": {
-      "type": "threshold",
       "domain": [
-       -0.5,
-       -0.2,
-       -0.05,
-       0.05,
-       0.2,
-       0.5,
-       1.0
+       "Below -50%",
+       "-50% to -20%",
+       "-20% to -5%",
+       "-5% to +5%",
+       "+5% to +20%",
+       "+20% to +50%",
+       "+50% to +100%",
+       "+100% or more"
       ],
       "range": [
-       "#2c5f8a",
-       "#6a9fc7",
-       "#bcd6ea",
+       "#3a7ca5",
+       "#7fb2d3",
+       "#c1dcec",
        "#f1efe9",
-       "#fbd5a8",
-       "#f5a65b",
-       "#e0742a",
-       "#8f3d0c"
+       "#fde0bd",
+       "#f7b26b",
+       "#e8803a",
+       "#c24e17"
       ]
      },
      "legend": {
-      "title": "Change",
-      "format": ".0%",
+      "type": "symbol",
       "symbolType": "square",
-      "orient": "right"
+      "symbolSize": 260,
+      "orient": "right",
+      "rowPadding": 4
      }
     },
     "tooltip": [
@@ -89,7 +96,8 @@
      },
      {
       "field": "change",
-      "format": ".0%"
+      "format": "+.0%",
+      "title": "Change"
      }
     ]
    }
@@ -107,7 +115,7 @@
     },
     "color": {
      "condition": {
-      "test": "datum.change < -0.2 || datum.change > 0.5",
+      "test": "datum.change < -0.5 || datum.change >= 1.0",
       "value": "white"
      },
      "value": "#222"
