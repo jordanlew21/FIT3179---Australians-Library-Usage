@@ -1,7 +1,7 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "Venues adults visited, 2017-18 and 2021-22",
+  "text": "Venues adults visited, 2017-18 and 2021-22.",
   "subtitle": "Percent of adults; labels show relative change"
  },
  "width": "container",
