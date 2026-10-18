@@ -1,0 +1,279 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Physical and digital library use, 2021-22 to 2024-25",
+  "subtitle": "Column width shows total loans; height shows the split"
+ },
+ "width": "container",
+ "height": 340,
+ "data": {
+  "url": "data/national_5yr_trend.csv"
+ },
+ "transform": [
+  {
+   "filter": "(datum.measure == 'Physical collection usage' || datum.measure == 'Digital collection usage (loans, database use, streaming)') && datum.year != '2020-21'"
+  },
+  {
+   "calculate": "indexof(datum.measure, 'Physical') == 0 ? 'Physical' : 'Digital'",
+   "as": "kind"
+  },
+  {
+   "pivot": "kind",
+   "value": "value",
+   "groupby": [
+    "year"
+   ]
+  },
+  {
+   "calculate": "toNumber(datum.Physical) / 1000000",
+   "as": "phys"
+  },
+  {
+   "calculate": "toNumber(datum.Digital) / 1000000",
+   "as": "digi"
+  },
+  {
+   "calculate": "datum.phys + datum.digi",
+   "as": "tot"
+  },
+  {
+   "calculate": "datum.phys / datum.tot",
+   "as": "sp"
+  },
+  {
+   "window": [
+    {
+     "op": "sum",
+     "field": "tot",
+     "as": "cum"
+    }
+   ],
+   "sort": [
+    {
+     "field": "year"
+    }
+   ],
+   "frame": [
+    null,
+    0
+   ]
+  },
+  {
+   "calculate": "datum.cum - datum.tot",
+   "as": "x1"
+  },
+  {
+   "calculate": "(datum.cum - datum.tot / 2)",
+   "as": "xm"
+  },
+  {
+   "fold": [
+    "phys",
+    "digi"
+   ],
+   "as": [
+    "k",
+    "v"
+   ]
+  },
+  {
+   "calculate": "datum.k == 'phys' ? 'Physical' : 'Digital'",
+   "as": "kind"
+  },
+  {
+   "calculate": "datum.kind == 'Physical' ? 0 : datum.sp",
+   "as": "ylo"
+  },
+  {
+   "calculate": "datum.kind == 'Physical' ? datum.sp : 1",
+   "as": "yhi"
+  },
+  {
+   "calculate": "datum.v / datum.tot",
+   "as": "share"
+  },
+  {
+   "calculate": "(datum.ylo + datum.yhi) / 2",
+   "as": "ym"
+  }
+ ],
+ "layer": [
+  {
+   "mark": {
+    "type": "rect",
+    "stroke": "white",
+    "strokeWidth": 3
+   },
+   "encoding": {
+    "x": {
+     "field": "x1",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       659.1
+      ],
+      "nice": false
+     },
+     "axis": null
+    },
+    "x2": {
+     "field": "cum"
+    },
+    "y": {
+     "field": "ylo",
+     "type": "quantitative",
+     "title": "Share of loans",
+     "axis": {
+      "format": "%",
+      "grid": false
+     }
+    },
+    "y2": {
+     "field": "yhi"
+    },
+    "color": {
+     "field": "kind",
+     "type": "nominal",
+     "title": null,
+     "scale": {
+      "domain": [
+       "Physical",
+       "Digital"
+      ],
+      "range": [
+       "#8c6d46",
+       "#1f7a8c"
+      ]
+     },
+     "legend": {
+      "orient": "bottom",
+      "symbolType": "square"
+     }
+    },
+    "tooltip": [
+     {
+      "field": "year",
+      "title": "Year"
+     },
+     {
+      "field": "kind",
+      "title": "Type"
+     },
+     {
+      "field": "v",
+      "title": "Loans (millions)",
+      "format": ".1f"
+     },
+     {
+      "field": "share",
+      "title": "Share",
+      "format": ".1%"
+     }
+    ]
+   }
+  },
+  {
+   "mark": {
+    "type": "text",
+    "fontSize": 15,
+    "fontWeight": "bold",
+    "color": "white"
+   },
+   "encoding": {
+    "x": {
+     "field": "xm",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       659.1
+      ],
+      "nice": false
+     }
+    },
+    "y": {
+     "field": "ym",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "share",
+     "type": "quantitative",
+     "format": ".0%"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.kind == 'Physical'"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "baseline": "bottom",
+    "dy": -6,
+    "color": "#333"
+   },
+   "encoding": {
+    "x": {
+     "field": "xm",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       659.1
+      ],
+      "nice": false
+     }
+    },
+    "y": {
+     "datum": 1
+    },
+    "text": {
+     "field": "year"
+    }
+   }
+  }
+ ],
+ "config": {
+  "font": "Open Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Lora",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "Open Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "Open Sans",
+   "titleFont": "Open Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "Open Sans"
+  }
+ }
+}
