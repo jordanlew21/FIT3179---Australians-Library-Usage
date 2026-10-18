@@ -2,7 +2,7 @@
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
   "text": "Eight states across five measures",
-  "subtitle": "Each line is a state; each axis runs from the lowest to the highest state"
+  "subtitle": "Each line is a state; click a state in the legend"
  },
  "width": "container",
  "height": 340,
@@ -75,7 +75,7 @@
     "labelExpr": "{'dig_share':'Digital share','online_share':'Online visits','visit_change':'In-person visits','digital_change':'Digital use','programs_change':'Program participants'}[datum.value]",
     "grid": true,
     "gridColor": "#ccc",
-    "labelLimit": 110
+    "labelLimit": 220
    }
   },
   "y": {
@@ -97,44 +97,26 @@
     "value": 1
    },
    "value": 0.18
-  }
- },
- "layer": [
-  {
-   "mark": {
-    "type": "line",
-    "strokeWidth": 2.5
-   },
-   "encoding": {
-    "detail": {
-     "field": "state"
-    }
-   }
   },
-  {
-   "mark": {
-    "type": "point",
-    "filled": true,
-    "size": 50
+  "detail": {
+   "field": "state"
+  },
+  "tooltip": [
+   {
+    "field": "state",
+    "title": "State"
    },
-   "encoding": {
-    "tooltip": [
-     {
-      "field": "state"
-     },
-     {
-      "field": "k",
-      "title": "Measure"
-     },
-     {
-      "field": "v",
-      "title": "Value",
-      "format": ".1%"
-     }
-    ]
+   {
+    "field": "k",
+    "title": "Measure"
+   },
+   {
+    "field": "v",
+    "title": "Value",
+    "format": ".1%"
    }
-  }
- ],
+  ]
+ },
  "config": {
   "font": "Open Sans",
   "view": {
@@ -171,6 +153,14 @@
   },
   "text": {
    "font": "Open Sans"
+  }
+ },
+ "mark": {
+  "type": "line",
+  "strokeWidth": 2.5,
+  "point": {
+   "filled": true,
+   "size": 50
   }
  }
 }
