@@ -1,8 +1,8 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "Library branches per state, 2024-25.",
-  "subtitle": "Circle area is proportional to branches"
+  "text": "Library branches per state, 2024-25",
+  "subtitle": "Circle area is proportional to branches; labels show state and branch count"
  },
  "width": "container",
  "height": 430,
@@ -88,6 +88,205 @@
       "title": "Branches"
      }
     ]
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "transform": [
+    {
+     "filter": "datum.state != 'ACT' && datum.state != 'TAS' && datum.state != 'NT'"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 12,
+    "fontWeight": "bold",
+    "color": "white",
+    "dy": -6
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "state",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "transform": [
+    {
+     "filter": "datum.state != 'ACT' && datum.state != 'TAS' && datum.state != 'NT'"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "dy": 8,
+    "color": "white"
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "branches",
+     "type": "quantitative"
+    }
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "transform": [
+    {
+     "filter": "datum.state == 'NT'"
+    },
+    {
+     "calculate": "datum.state + ' ' + datum.branches",
+     "as": "tag"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 12,
+    "fontWeight": "bold",
+    "color": "#333",
+    "dy": -15
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "tag",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "transform": [
+    {
+     "filter": "datum.state == 'TAS'"
+    },
+    {
+     "calculate": "datum.state + ' ' + datum.branches",
+     "as": "tag"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 12,
+    "fontWeight": "bold",
+    "color": "#333",
+    "align": "left",
+    "dx": 15
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "tag",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "lon": 149.13,
+      "lat": -35.28,
+      "lon2": 150.9,
+      "lat2": -37.6
+     }
+    ]
+   },
+   "mark": {
+    "type": "rule",
+    "color": "#555",
+    "strokeWidth": 1
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "longitude2": {
+     "field": "lon2"
+    },
+    "latitude2": {
+     "field": "lat2"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "lon": 150.9,
+      "lat": -37.6,
+      "tag": "ACT 10"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 12,
+    "fontWeight": "bold",
+    "color": "#333",
+    "align": "left",
+    "dx": 4,
+    "dy": 6
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "tag",
+     "type": "nominal"
+    }
    }
   }
  ],
