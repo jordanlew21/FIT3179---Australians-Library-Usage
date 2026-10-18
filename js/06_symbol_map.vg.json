@@ -2,7 +2,7 @@
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
   "text": "Library branches per state, 2024-25",
-  "subtitle": "Each circle sits on the capital city but shows the whole state"
+  "subtitle": "Circle area is proportional to branches"
  },
  "width": "container",
  "height": 430,
@@ -57,11 +57,16 @@
      "type": "quantitative",
      "title": "Branches",
      "scale": {
-      "type": "sqrt",
+      "type": "linear",
+      "domain": [
+       0,
+       400
+      ],
       "range": [
-       40,
-       2000
-      ]
+       0,
+       2600
+      ],
+      "zero": true
      },
      "legend": {
       "values": [
@@ -69,7 +74,8 @@
        100,
        300
       ],
-      "orient": "top-right"
+      "orient": "top-right",
+      "title": "Branches"
      }
     },
     "tooltip": [
