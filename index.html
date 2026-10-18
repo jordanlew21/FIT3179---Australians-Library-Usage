@@ -64,7 +64,7 @@
   </div>
   <div class="text">
     <h3>Branches follow people</h3>
-    <p>New South Wales has 365 of Australia's 1,409 library branches, Queensland has 303 and Victoria 292. The ACT has 10.</p>
+    <p>New South Wales has 365 of Australia's 1,409 library branches, Queensland has 303 and Victoria 292. The ACT has 10. Each circle sits on the state's capital city but counts the whole state, and its area is proportional to the number of branches.</p>
   </div>
   <div class="pure-g"><div class="pure-u-1-1"><div id="vis6" class="vis-container"></div></div></div>
 </section>
@@ -98,8 +98,8 @@
   </div>
   <div class="pure-g"><div class="pure-u-1-1"><div id="vis9" class="vis-container"></div></div></div>
   <div class="text">
-    <h3>Libraries held up better than most venues</h3>
-    <p>Cinemas and live music lost more than 20 percentage points. Libraries lost about 10. Among Australians aged 75 and over, libraries became the most visited venue of all.</p>
+    <h3>Libraries lost about a third of their visitors, like cinemas</h3>
+    <p>Measured against their own 2017-18 audience, libraries, cinemas and art galleries each lost about a third of their visitors. Live music, theatre and dance lost about half. Among Australians aged 75 and over, libraries were the most visited venue of all.</p>
   </div>
   <div class="pure-g"><div class="pure-u-1-1"><div id="vis10" class="vis-container"></div></div></div>
   <div class="text">
@@ -125,7 +125,7 @@
 
 </div>
 <script>
-var specs = ["01_waffle","02_streamgraph","03_connected_scatter","04_choropleth","05_tile_grid","06_symbol_map","07_heatmap","08_parallel","12_bump","09_slope_age","10_dumbbell","11_frequency"];
+var specs = ["01_waffle","02_marimekko","03_connected_scatter","04_choropleth","05_tile_grid","06_symbol_map","07_heatmap","08_parallel","12_bump","09_slope_age","10_dumbbell","11_frequency"];
 var ids = [1,2,3,4,5,6,7,8,12,9,10,11];
 specs.forEach(function (s, i) { vegaEmbed("#vis" + ids[i], "js/" + s + ".vg.json", { actions: false }).catch(console.error); });
 </script>
