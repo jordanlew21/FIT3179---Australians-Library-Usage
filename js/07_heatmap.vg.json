@@ -2,19 +2,13 @@
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
   "text": "How each state changed between 2021-22 and 2024-25",
-  "subtitle": "Blue = decrease, orange = increase; the darkest orange is +100% or more"
+  "subtitle": "Blue = decrease, orange = increase; colours stop at -50% and +100%"
  },
  "width": "container",
  "height": 330,
  "data": {
   "url": "data/state_change.csv"
  },
- "transform": [
-  {
-   "calculate": "datum.change < -0.5 ? 'Below -50%' : datum.change < -0.2 ? '-50% to -20%' : datum.change < -0.05 ? '-20% to -5%' : datum.change < 0.05 ? '-5% to +5%' : datum.change < 0.2 ? '+5% to +20%' : datum.change < 0.5 ? '+20% to +50%' : datum.change < 1.0 ? '+50% to +100%' : '+100% or more'",
-   "as": "band"
-  }
- ],
  "encoding": {
   "x": {
    "field": "measure",
@@ -54,37 +48,43 @@
    "mark": "rect",
    "encoding": {
     "color": {
-     "field": "band",
-     "type": "ordinal",
+     "field": "change",
+     "type": "quantitative",
      "title": "Change since 2021-22",
      "scale": {
+      "type": "linear",
+      "clamp": true,
       "domain": [
-       "Below -50%",
-       "-50% to -20%",
-       "-20% to -5%",
-       "-5% to +5%",
-       "+5% to +20%",
-       "+20% to +50%",
-       "+50% to +100%",
-       "+100% or more"
+       -0.5,
+       -0.2,
+       0,
+       0.2,
+       0.5,
+       1.0
       ],
       "range": [
        "#3a7ca5",
-       "#7fb2d3",
-       "#c1dcec",
+       "#9cc3dd",
        "#f1efe9",
-       "#fde0bd",
-       "#f7b26b",
-       "#e8803a",
+       "#fbd5a8",
+       "#f0985a",
        "#c24e17"
       ]
      },
      "legend": {
-      "type": "symbol",
-      "symbolType": "square",
-      "symbolSize": 260,
+      "type": "gradient",
       "orient": "right",
-      "rowPadding": 4
+      "gradientLength": 240,
+      "gradientThickness": 16,
+      "values": [
+       -0.5,
+       -0.2,
+       0,
+       0.2,
+       0.5,
+       1.0
+      ],
+      "labelExpr": "datum.value >= 1 ? '+100% or more' : datum.value <= -0.5 ? '-50% or less' : format(datum.value, '+.0%')"
      }
     },
     "tooltip": [
@@ -115,7 +115,7 @@
     },
     "color": {
      "condition": {
-      "test": "datum.change < -0.5 || datum.change >= 1.0",
+      "test": "datum.change <= -0.4 || datum.change >= 0.8",
       "value": "white"
      },
      "value": "#222"
