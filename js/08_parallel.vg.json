@@ -2,10 +2,10 @@
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
   "text": "Eight states across five measures",
-  "subtitle": "Each line is a state; click a state in the legend"
+  "subtitle": "Each line is a state; each axis is a measure, with the lowest state at the bottom"
  },
  "width": "container",
- "height": 340,
+ "height": 380,
  "data": {
   "url": "data/states.csv"
  },
@@ -45,78 +45,6 @@
    "as": "n"
   }
  ],
- "params": [
-  {
-   "name": "hl",
-   "select": {
-    "type": "point",
-    "fields": [
-     "state"
-    ]
-   },
-   "bind": "legend"
-  }
- ],
- "encoding": {
-  "x": {
-   "field": "k",
-   "type": "nominal",
-   "title": null,
-   "sort": [
-    "dig_share",
-    "online_share",
-    "visit_change",
-    "digital_change",
-    "programs_change"
-   ],
-   "axis": {
-    "orient": "top",
-    "labelAngle": 0,
-    "labelExpr": "{'dig_share':'Digital share','online_share':'Online visits','visit_change':'In-person visits','digital_change':'Digital use','programs_change':'Program participants'}[datum.value]",
-    "grid": true,
-    "gridColor": "#ccc",
-    "labelLimit": 220
-   }
-  },
-  "y": {
-   "field": "n",
-   "type": "quantitative",
-   "axis": null
-  },
-  "color": {
-   "field": "state",
-   "type": "nominal",
-   "title": "State",
-   "scale": {
-    "scheme": "category10"
-   }
-  },
-  "opacity": {
-   "condition": {
-    "param": "hl",
-    "value": 1
-   },
-   "value": 0.18
-  },
-  "detail": {
-   "field": "state"
-  },
-  "tooltip": [
-   {
-    "field": "state",
-    "title": "State"
-   },
-   {
-    "field": "k",
-    "title": "Measure"
-   },
-   {
-    "field": "v",
-    "title": "Value",
-    "format": ".1%"
-   }
-  ]
- },
  "config": {
   "font": "Open Sans",
   "view": {
@@ -155,12 +83,250 @@
    "font": "Open Sans"
   }
  },
- "mark": {
-  "type": "line",
-  "strokeWidth": 2.5,
-  "point": {
-   "filled": true,
-   "size": 50
+ "layer": [
+  {
+   "params": [
+    {
+     "name": "hl",
+     "select": {
+      "type": "point",
+      "fields": [
+       "state"
+      ]
+     },
+     "bind": "legend"
+    }
+   ],
+   "mark": {
+    "type": "line",
+    "strokeWidth": 2.5,
+    "point": {
+     "filled": true,
+     "size": 50
+    }
+   },
+   "encoding": {
+    "x": {
+     "field": "k",
+     "type": "nominal",
+     "title": null,
+     "sort": [
+      "dig_share",
+      "online_share",
+      "visit_change",
+      "digital_change",
+      "programs_change"
+     ],
+     "axis": {
+      "orient": "top",
+      "labelAngle": 0,
+      "labelFontSize": 11,
+      "labelLimit": 200,
+      "labelPadding": 8,
+      "labelExpr": "{'dig_share':['Digital share','(% of all use, 2024-25)'],'online_share':['Online visits','(% of all visits, 2024-25)'],'visit_change':['In-person visits','(% change since 2021-22)'],'digital_change':['Digital use','(% change since 2021-22)'],'programs_change':['Program participants','(% change since 2021-22)']}[datum.value]",
+      "grid": true,
+      "gridColor": "#ccc",
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "n",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.14,
+       1.14
+      ]
+     },
+     "axis": {
+      "title": "Lowest state  \u2192  highest state (on each measure)",
+      "labels": false,
+      "ticks": false,
+      "domain": false,
+      "grid": false,
+      "titleFontSize": 11,
+      "titleColor": "#555"
+     }
+    },
+    "color": {
+     "field": "state",
+     "type": "nominal",
+     "title": "State",
+     "scale": {
+      "scheme": "category10"
+     }
+    },
+    "opacity": {
+     "condition": {
+      "param": "hl",
+      "value": 1
+     },
+     "value": 0.18
+    },
+    "detail": {
+     "field": "state"
+    },
+    "tooltip": [
+     {
+      "field": "state",
+      "title": "State"
+     },
+     {
+      "field": "k",
+      "title": "Measure"
+     },
+     {
+      "field": "v",
+      "title": "Value",
+      "format": ".1%"
+     }
+    ]
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.n == 1"
+    },
+    {
+     "calculate": "(datum.k == 'dig_share' || datum.k == 'online_share') ? format(datum.v, '.0%') : format(datum.v, '+.0%')",
+     "as": "vtxt"
+    },
+    {
+     "calculate": "datum.state + '  ' + datum.vtxt",
+     "as": "endlabel"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "fontWeight": "bold",
+    "color": "#333",
+    "baseline": "middle",
+    "dy": -13
+   },
+   "encoding": {
+    "x": {
+     "field": "k",
+     "type": "nominal",
+     "title": null,
+     "sort": [
+      "dig_share",
+      "online_share",
+      "visit_change",
+      "digital_change",
+      "programs_change"
+     ],
+     "axis": {
+      "orient": "top",
+      "labelAngle": 0,
+      "labelFontSize": 11,
+      "labelLimit": 200,
+      "labelPadding": 8,
+      "labelExpr": "{'dig_share':['Digital share','(% of all use, 2024-25)'],'online_share':['Online visits','(% of all visits, 2024-25)'],'visit_change':['In-person visits','(% change since 2021-22)'],'digital_change':['Digital use','(% change since 2021-22)'],'programs_change':['Program participants','(% change since 2021-22)']}[datum.value]",
+      "grid": true,
+      "gridColor": "#ccc",
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "n",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.14,
+       1.14
+      ]
+     },
+     "axis": {
+      "title": "Lowest state  \u2192  highest state (on each measure)",
+      "labels": false,
+      "ticks": false,
+      "domain": false,
+      "grid": false,
+      "titleFontSize": 11,
+      "titleColor": "#555"
+     }
+    },
+    "text": {
+     "field": "endlabel",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.n == 0"
+    },
+    {
+     "calculate": "(datum.k == 'dig_share' || datum.k == 'online_share') ? format(datum.v, '.0%') : format(datum.v, '+.0%')",
+     "as": "vtxt"
+    },
+    {
+     "calculate": "datum.state + '  ' + datum.vtxt",
+     "as": "endlabel"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "fontWeight": "bold",
+    "color": "#333",
+    "baseline": "middle",
+    "dy": 14
+   },
+   "encoding": {
+    "x": {
+     "field": "k",
+     "type": "nominal",
+     "title": null,
+     "sort": [
+      "dig_share",
+      "online_share",
+      "visit_change",
+      "digital_change",
+      "programs_change"
+     ],
+     "axis": {
+      "orient": "top",
+      "labelAngle": 0,
+      "labelFontSize": 11,
+      "labelLimit": 200,
+      "labelPadding": 8,
+      "labelExpr": "{'dig_share':['Digital share','(% of all use, 2024-25)'],'online_share':['Online visits','(% of all visits, 2024-25)'],'visit_change':['In-person visits','(% change since 2021-22)'],'digital_change':['Digital use','(% change since 2021-22)'],'programs_change':['Program participants','(% change since 2021-22)']}[datum.value]",
+      "grid": true,
+      "gridColor": "#ccc",
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "n",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.14,
+       1.14
+      ]
+     },
+     "axis": {
+      "title": "Lowest state  \u2192  highest state (on each measure)",
+      "labels": false,
+      "ticks": false,
+      "domain": false,
+      "grid": false,
+      "titleFontSize": 11,
+      "titleColor": "#555"
+     }
+    },
+    "text": {
+     "field": "endlabel",
+     "type": "nominal"
+    }
+   }
   }
- }
+ ]
 }
