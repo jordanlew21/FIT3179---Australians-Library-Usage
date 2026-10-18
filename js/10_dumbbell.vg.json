@@ -56,7 +56,7 @@
   {
    "mark": {
     "type": "rule",
-    "strokeWidth": 5
+    "strokeWidth": 2
    },
    "encoding": {
     "x": {
@@ -82,15 +82,15 @@
        "Audience fell by about half"
       ],
       "range": [
-       "#a9cbe0",
-       "#2f6f8f"
+       "#2b8cbe",
+       "#08306b"
       ]
      },
      "legend": {
       "title": "Change since 2017-18",
       "orient": "top",
       "symbolType": "stroke",
-      "symbolStrokeWidth": 5
+      "symbolStrokeWidth": 2
      }
     },
     "tooltip": [
