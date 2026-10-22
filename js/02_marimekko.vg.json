@@ -142,8 +142,8 @@
        "Digital"
       ],
       "range": [
-       "#8c6d46",
-       "#1f7a8c"
+       "#2b6cb0",
+       "#2a9d78"
       ]
      },
      "legend": {
@@ -239,24 +239,24 @@
   }
  ],
  "config": {
-  "font": "Open Sans",
+  "font": "DM Sans",
   "view": {
    "stroke": null
   },
   "title": {
-   "font": "Lora",
+   "font": "Playfair Display",
    "fontSize": 17,
    "fontWeight": 600,
    "anchor": "start",
    "offset": 12,
-   "subtitleFont": "Open Sans",
+   "subtitleFont": "DM Sans",
    "subtitleFontSize": 13,
    "subtitleColor": "#555",
    "subtitlePadding": 4
   },
   "axis": {
-   "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600,
@@ -266,14 +266,14 @@
    "labelColor": "#333"
   },
   "legend": {
-   "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600
   },
   "text": {
-   "font": "Open Sans"
+   "font": "DM Sans"
   }
  }
 }
