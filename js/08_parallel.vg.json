@@ -1,69 +1,529 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "Eight states across five measures",
-  "subtitle": "Each line is a state; each axis is a measure, with the lowest state at the bottom"
+  "text": "Digital growth and visit recovery moved independently across states",
+  "subtitle": "Each dot is a state; dashed lines show the national change"
  },
  "width": "container",
- "height": 380,
- "data": {
-  "url": "data/states.csv"
- },
- "transform": [
+ "height": 420,
+ "layer": [
   {
-   "fold": [
-    "dig_share",
-    "online_share",
-    "visit_change",
-    "digital_change",
-    "programs_change"
-   ],
-   "as": [
-    "k",
-    "v"
-   ]
+   "data": {
+    "values": [
+     {
+      "v": 0.42
+     }
+    ]
+   },
+   "mark": {
+    "type": "rule",
+    "strokeDash": [
+     5,
+     4
+    ],
+    "color": "#999"
+   },
+   "encoding": {
+    "x": {
+     "field": "v",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     }
+    }
+   }
   },
   {
-   "joinaggregate": [
-    {
-     "op": "min",
+   "data": {
+    "values": [
+     {
+      "v": 0.62
+     }
+    ]
+   },
+   "mark": {
+    "type": "rule",
+    "strokeDash": [
+     5,
+     4
+    ],
+    "color": "#999"
+   },
+   "encoding": {
+    "y": {
      "field": "v",
-     "as": "mn"
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     }
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "x": 0.42,
+      "y": -0.04,
+      "t": "Australia: digital +42%"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "dx": 5,
+    "fontSize": 11,
+    "color": "#555"
+   },
+   "encoding": {
+    "x": {
+     "field": "x",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     }
     },
+    "y": {
+     "field": "y",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     }
+    },
+    "text": {
+     "field": "t",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "x": 0.845,
+      "y": 0.62,
+      "t": "Australia: visits +62%"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "align": "right",
+    "dy": -7,
+    "fontSize": 11,
+    "color": "#555"
+   },
+   "encoding": {
+    "x": {
+     "field": "x",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     }
+    },
+    "y": {
+     "field": "y",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     }
+    },
+    "text": {
+     "field": "t",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "x": 0.105,
+      "y": 1.29,
+      "t": "More visits, less digital growth"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "fontSize": 11,
+    "fontStyle": "italic",
+    "color": "#888"
+   },
+   "encoding": {
+    "x": {
+     "field": "x",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     }
+    },
+    "y": {
+     "field": "y",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     }
+    },
+    "text": {
+     "field": "t",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "x": 0.845,
+      "y": 1.29,
+      "t": "Both above the national change"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "align": "right",
+    "fontSize": 11,
+    "fontStyle": "italic",
+    "color": "#888"
+   },
+   "encoding": {
+    "x": {
+     "field": "x",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     }
+    },
+    "y": {
+     "field": "y",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     }
+    },
+    "text": {
+     "field": "t",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "x": 0.105,
+      "y": 0.0,
+      "t": "Both below the national change"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "fontSize": 11,
+    "fontStyle": "italic",
+    "color": "#888"
+   },
+   "encoding": {
+    "x": {
+     "field": "x",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     }
+    },
+    "y": {
+     "field": "y",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     }
+    },
+    "text": {
+     "field": "t",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "x": 0.845,
+      "y": 0.0,
+      "t": "More digital growth, slower visit recovery"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "align": "right",
+    "fontSize": 11,
+    "fontStyle": "italic",
+    "color": "#888"
+   },
+   "encoding": {
+    "x": {
+     "field": "x",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     }
+    },
+    "y": {
+     "field": "y",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     }
+    },
+    "text": {
+     "field": "t",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "mark": {
+    "type": "circle",
+    "size": 220,
+    "color": "#4a6072",
+    "opacity": 0.9,
+    "stroke": "white",
+    "strokeWidth": 1.5
+   },
+   "encoding": {
+    "x": {
+     "field": "digital_change",
+     "type": "quantitative",
+     "title": "Growth in digital use, 2021-22 to 2024-25",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     },
+     "axis": {
+      "format": "+.0%",
+      "grid": false,
+      "tickCount": 7
+     }
+    },
+    "y": {
+     "field": "visit_change",
+     "type": "quantitative",
+     "title": "Growth in in-person visits, 2021-22 to 2024-25",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     },
+     "axis": {
+      "format": "+.0%",
+      "grid": false,
+      "tickCount": 7
+     }
+    },
+    "tooltip": [
+     {
+      "field": "state_name",
+      "title": "State"
+     },
+     {
+      "field": "digital_change",
+      "title": "Digital use",
+      "format": "+.0%"
+     },
+     {
+      "field": "visit_change",
+      "title": "In-person visits",
+      "format": "+.0%"
+     }
+    ]
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "transform": [
     {
-     "op": "max",
-     "field": "v",
-     "as": "mx"
+     "filter": "datum.state != 'QLD'"
     }
    ],
-   "groupby": [
-    "k"
-   ]
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "dx": 12,
+    "fontSize": 12,
+    "fontWeight": "bold",
+    "color": "#123a5e"
+   },
+   "encoding": {
+    "x": {
+     "field": "digital_change",
+     "type": "quantitative",
+     "title": "Growth in digital use, 2021-22 to 2024-25",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     },
+     "axis": {
+      "format": "+.0%",
+      "grid": false,
+      "tickCount": 7
+     }
+    },
+    "y": {
+     "field": "visit_change",
+     "type": "quantitative",
+     "title": "Growth in in-person visits, 2021-22 to 2024-25",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     },
+     "axis": {
+      "format": "+.0%",
+      "grid": false,
+      "tickCount": 7
+     }
+    },
+    "text": {
+     "field": "state",
+     "type": "nominal"
+    }
+   }
   },
   {
-   "calculate": "(datum.v - datum.mn) / (datum.mx - datum.mn)",
-   "as": "n"
+   "data": {
+    "url": "data/states.csv"
+   },
+   "transform": [
+    {
+     "filter": "datum.state == 'QLD'"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "align": "right",
+    "dx": -12,
+    "fontSize": 12,
+    "fontWeight": "bold",
+    "color": "#123a5e"
+   },
+   "encoding": {
+    "x": {
+     "field": "digital_change",
+     "type": "quantitative",
+     "title": "Growth in digital use, 2021-22 to 2024-25",
+     "scale": {
+      "domain": [
+       0.1,
+       0.85
+      ]
+     },
+     "axis": {
+      "format": "+.0%",
+      "grid": false,
+      "tickCount": 7
+     }
+    },
+    "y": {
+     "field": "visit_change",
+     "type": "quantitative",
+     "title": "Growth in in-person visits, 2021-22 to 2024-25",
+     "scale": {
+      "domain": [
+       -0.08,
+       1.32
+      ]
+     },
+     "axis": {
+      "format": "+.0%",
+      "grid": false,
+      "tickCount": 7
+     }
+    },
+    "text": {
+     "field": "state",
+     "type": "nominal"
+    }
+   }
   }
  ],
  "config": {
-  "font": "Open Sans",
+  "font": "DM Sans",
   "view": {
    "stroke": null
   },
   "title": {
-   "font": "Lora",
+   "font": "Playfair Display",
    "fontSize": 17,
    "fontWeight": 600,
    "anchor": "start",
    "offset": 12,
-   "subtitleFont": "Open Sans",
+   "subtitleFont": "DM Sans",
    "subtitleFontSize": 13,
    "subtitleColor": "#555",
    "subtitlePadding": 4
   },
   "axis": {
-   "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600,
@@ -73,260 +533,14 @@
    "labelColor": "#333"
   },
   "legend": {
-   "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600
   },
   "text": {
-   "font": "Open Sans"
+   "font": "DM Sans"
   }
- },
- "layer": [
-  {
-   "params": [
-    {
-     "name": "hl",
-     "select": {
-      "type": "point",
-      "fields": [
-       "state"
-      ]
-     },
-     "bind": "legend"
-    }
-   ],
-   "mark": {
-    "type": "line",
-    "strokeWidth": 2.5,
-    "point": {
-     "filled": true,
-     "size": 50
-    }
-   },
-   "encoding": {
-    "x": {
-     "field": "k",
-     "type": "nominal",
-     "title": null,
-     "sort": [
-      "dig_share",
-      "online_share",
-      "visit_change",
-      "digital_change",
-      "programs_change"
-     ],
-     "axis": {
-      "orient": "top",
-      "labelAngle": 0,
-      "labelFontSize": 11,
-      "labelLimit": 200,
-      "labelPadding": 8,
-      "labelExpr": "{'dig_share':['Digital share','(% of all use, 2024-25)'],'online_share':['Online visits','(% of all visits, 2024-25)'],'visit_change':['In-person visits','(% change since 2021-22)'],'digital_change':['Digital use','(% change since 2021-22)'],'programs_change':['Program participants','(% change since 2021-22)']}[datum.value]",
-      "grid": true,
-      "gridColor": "#ccc",
-      "domain": false,
-      "ticks": false
-     }
-    },
-    "y": {
-     "field": "n",
-     "type": "quantitative",
-     "scale": {
-      "domain": [
-       -0.14,
-       1.14
-      ]
-     },
-     "axis": {
-      "title": "Lowest state  \u2192  highest state (on each measure)",
-      "labels": false,
-      "ticks": false,
-      "domain": false,
-      "grid": false,
-      "titleFontSize": 11,
-      "titleColor": "#555"
-     }
-    },
-    "color": {
-     "field": "state",
-     "type": "nominal",
-     "title": "State",
-     "scale": {
-      "scheme": "category10"
-     }
-    },
-    "opacity": {
-     "condition": {
-      "param": "hl",
-      "value": 1
-     },
-     "value": 0.18
-    },
-    "detail": {
-     "field": "state"
-    },
-    "tooltip": [
-     {
-      "field": "state",
-      "title": "State"
-     },
-     {
-      "field": "k",
-      "title": "Measure"
-     },
-     {
-      "field": "v",
-      "title": "Value",
-      "format": ".1%"
-     }
-    ]
-   }
-  },
-  {
-   "transform": [
-    {
-     "filter": "datum.n == 1"
-    },
-    {
-     "calculate": "(datum.k == 'dig_share' || datum.k == 'online_share') ? format(datum.v, '.0%') : format(datum.v, '+.0%')",
-     "as": "vtxt"
-    },
-    {
-     "calculate": "datum.state + '  ' + datum.vtxt",
-     "as": "endlabel"
-    }
-   ],
-   "mark": {
-    "type": "text",
-    "fontSize": 11,
-    "fontWeight": "bold",
-    "color": "#333",
-    "baseline": "middle",
-    "dy": -13
-   },
-   "encoding": {
-    "x": {
-     "field": "k",
-     "type": "nominal",
-     "title": null,
-     "sort": [
-      "dig_share",
-      "online_share",
-      "visit_change",
-      "digital_change",
-      "programs_change"
-     ],
-     "axis": {
-      "orient": "top",
-      "labelAngle": 0,
-      "labelFontSize": 11,
-      "labelLimit": 200,
-      "labelPadding": 8,
-      "labelExpr": "{'dig_share':['Digital share','(% of all use, 2024-25)'],'online_share':['Online visits','(% of all visits, 2024-25)'],'visit_change':['In-person visits','(% change since 2021-22)'],'digital_change':['Digital use','(% change since 2021-22)'],'programs_change':['Program participants','(% change since 2021-22)']}[datum.value]",
-      "grid": true,
-      "gridColor": "#ccc",
-      "domain": false,
-      "ticks": false
-     }
-    },
-    "y": {
-     "field": "n",
-     "type": "quantitative",
-     "scale": {
-      "domain": [
-       -0.14,
-       1.14
-      ]
-     },
-     "axis": {
-      "title": "Lowest state  \u2192  highest state (on each measure)",
-      "labels": false,
-      "ticks": false,
-      "domain": false,
-      "grid": false,
-      "titleFontSize": 11,
-      "titleColor": "#555"
-     }
-    },
-    "text": {
-     "field": "endlabel",
-     "type": "nominal"
-    }
-   }
-  },
-  {
-   "transform": [
-    {
-     "filter": "datum.n == 0"
-    },
-    {
-     "calculate": "(datum.k == 'dig_share' || datum.k == 'online_share') ? format(datum.v, '.0%') : format(datum.v, '+.0%')",
-     "as": "vtxt"
-    },
-    {
-     "calculate": "datum.state + '  ' + datum.vtxt",
-     "as": "endlabel"
-    }
-   ],
-   "mark": {
-    "type": "text",
-    "fontSize": 11,
-    "fontWeight": "bold",
-    "color": "#333",
-    "baseline": "middle",
-    "dy": 14
-   },
-   "encoding": {
-    "x": {
-     "field": "k",
-     "type": "nominal",
-     "title": null,
-     "sort": [
-      "dig_share",
-      "online_share",
-      "visit_change",
-      "digital_change",
-      "programs_change"
-     ],
-     "axis": {
-      "orient": "top",
-      "labelAngle": 0,
-      "labelFontSize": 11,
-      "labelLimit": 200,
-      "labelPadding": 8,
-      "labelExpr": "{'dig_share':['Digital share','(% of all use, 2024-25)'],'online_share':['Online visits','(% of all visits, 2024-25)'],'visit_change':['In-person visits','(% change since 2021-22)'],'digital_change':['Digital use','(% change since 2021-22)'],'programs_change':['Program participants','(% change since 2021-22)']}[datum.value]",
-      "grid": true,
-      "gridColor": "#ccc",
-      "domain": false,
-      "ticks": false
-     }
-    },
-    "y": {
-     "field": "n",
-     "type": "quantitative",
-     "scale": {
-      "domain": [
-       -0.14,
-       1.14
-      ]
-     },
-     "axis": {
-      "title": "Lowest state  \u2192  highest state (on each measure)",
-      "labels": false,
-      "ticks": false,
-      "domain": false,
-      "grid": false,
-      "titleFontSize": 11,
-      "titleColor": "#555"
-     }
-    },
-    "text": {
-     "field": "endlabel",
-     "type": "nominal"
-    }
-   }
-  }
- ]
+ }
 }
