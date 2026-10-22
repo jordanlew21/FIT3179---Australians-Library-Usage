@@ -1,0 +1,147 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "What people come to libraries for is growing and changing",
+  "subtitle": "Program participants by what the program is for; band thickness = participants"
+ },
+ "width": "container",
+ "height": 360,
+ "data": {
+  "url": "data/national_5yr_trend.csv"
+ },
+ "transform": [
+  {
+   "filter": "indexof(datum.measure, 'Participants: ') == 0"
+  },
+  {
+   "calculate": "slice(datum.measure, 14)",
+   "as": "area"
+  },
+  {
+   "calculate": "toNumber(datum.value)",
+   "as": "n"
+  },
+  {
+   "filter": "datum.n > 0"
+  },
+  {
+   "calculate": "{'Economic and workforce development':0,'Digital inclusion':1,'Literacy and lifelong learning':2,'Personal development and wellbeing':3,'Stronger and more creative communities':4,'Informed and connected citizens':5}[datum.area]",
+   "as": "ord"
+  }
+ ],
+ "mark": {
+  "type": "area",
+  "interpolate": "monotone",
+  "opacity": 0.95
+ },
+ "encoding": {
+  "x": {
+   "field": "year",
+   "type": "ordinal",
+   "title": null,
+   "scale": {
+    "type": "point",
+    "padding": 0
+   },
+   "axis": {
+    "labelAngle": 0,
+    "labelFontSize": 12,
+    "grid": false
+   }
+  },
+  "y": {
+   "field": "n",
+   "type": "quantitative",
+   "stack": "center",
+   "axis": {
+    "title": "Program participants (band thickness)",
+    "labels": false,
+    "ticks": false,
+    "domain": false,
+    "grid": false,
+    "titleFontSize": 12
+   }
+  },
+  "color": {
+   "field": "area",
+   "type": "nominal",
+   "title": "Program purpose",
+   "scale": {
+    "domain": [
+     "Economic and workforce development",
+     "Digital inclusion",
+     "Literacy and lifelong learning",
+     "Personal development and wellbeing",
+     "Stronger and more creative communities",
+     "Informed and connected citizens"
+    ],
+    "range": [
+     "#bdbdbd","#c9801c","#178a94","#5b68c8","#a58fd8","#7fc4c9"
+    ]
+   },
+   "legend": {
+    "orient": "right",
+    "symbolType": "square",
+    "symbolSize": 160,
+    "labelLimit": 240
+   }
+  },
+  "order": {
+   "field": "ord",
+   "type": "quantitative"
+  },
+  "tooltip": [
+   {
+    "field": "area",
+    "title": "Purpose"
+   },
+   {
+    "field": "year",
+    "title": "Year"
+   },
+   {
+    "field": "n",
+    "title": "Participants",
+    "format": ","
+   }
+  ]
+ },
+ "config": {
+  "font": "DM Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Playfair Display",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "DM Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "DM Sans"
+  }
+ }
+}
