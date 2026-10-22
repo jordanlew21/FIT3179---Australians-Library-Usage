@@ -1,76 +1,243 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "Every public library in Australia",
-  "subtitle": "One dot = one library, 2016\u20132018"
+  "text": "Use is up almost everywhere, but fewer people are members",
+  "subtitle": "Each panel is one measure, indexed so that 2021-22 = 100"
  },
- "width": "container",
- "height": 380,
- "projection": {
-  "type": "conicEqualArea",
-  "parallels": [
-   -18,
-   -36
-  ],
-  "rotate": [
-   -132,
-   0
-  ]
+ "data": {
+  "url": "data/national_5yr_trend.csv"
  },
- "layer": [
+ "transform": [
   {
-   "data": {
-    "url": "data/australia_states.topojson",
-    "format": {
-     "type": "topojson",
-     "feature": "australia_states"
-    }
-   },
-   "mark": {
-    "type": "geoshape",
-    "fill": "#eef2f5",
-    "stroke": "#b9c4cc",
-    "strokeWidth": 0.8
-   }
+   "filter": "indexof([\"Library visits (physical facilities)\", \"Website visits\", \"Physical collection usage\", \"Digital collection usage (loans, database use, streaming)\", \"Registered library members\", \"Programs\"], datum.measure) >= 0"
   },
   {
-   "data": {
-    "url": "data/library_locations.csv"
-   },
-   "mark": {
-    "type": "circle",
-    "size": 9,
-    "color": "#4a6072",
-    "opacity": 0.6,
-    "stroke": "white",
-    "strokeWidth": 0.2
-   },
-   "encoding": {
-    "longitude": {
-     "field": "lon",
-     "type": "quantitative"
-    },
-    "latitude": {
-     "field": "lat",
-     "type": "quantitative"
-    },
-    "tooltip": [
-     {
-      "field": "library",
-      "title": "Library"
-     },
-     {
-      "field": "suburb",
-      "title": "Suburb"
-     },
-     {
-      "field": "state",
-      "title": "State"
-     }
-    ]
-   }
+   "calculate": "{'Library visits (physical facilities)':'In-person visits','Website visits':'Website visits','Physical collection usage':'Physical loans','Digital collection usage (loans, database use, streaming)':'Digital loans','Registered library members':'Library members','Programs':'Programs run'}[datum.measure]",
+   "as": "panel"
+  },
+  {
+   "calculate": "toNumber(datum.value)",
+   "as": "val"
+  },
+  {
+   "calculate": "datum.year == '2021-22' ? datum.val : null",
+   "as": "base_val"
+  },
+  {
+   "joinaggregate": [
+    {
+     "op": "max",
+     "field": "base_val",
+     "as": "base"
+    }
+   ],
+   "groupby": [
+    "panel"
+   ]
+  },
+  {
+   "calculate": "datum.val / datum.base * 100",
+   "as": "idx"
+  },
+  {
+   "calculate": "datum.year == '2024-25' ? datum.idx : null",
+   "as": "last_val"
+  },
+  {
+   "joinaggregate": [
+    {
+     "op": "max",
+     "field": "last_val",
+     "as": "last"
+    }
+   ],
+   "groupby": [
+    "panel"
+   ]
+  },
+  {
+   "calculate": "datum.last >= 100 ? 'Grew' : 'Fell'",
+   "as": "dir"
   }
  ],
+ "facet": {
+  "field": "panel",
+  "type": "nominal",
+  "sort": [
+   "In-person visits",
+   "Website visits",
+   "Physical loans",
+   "Digital loans",
+   "Library members",
+   "Programs run"
+  ],
+  "title": null,
+  "header": {
+   "labelFontSize": 13,
+   "labelFontWeight": 600,
+   "labelAnchor": "start",
+   "labelPadding": 6
+  }
+ },
+ "columns": 3,
+ "spec": {
+  "width": 230,
+  "height": 150,
+  "layer": [
+   {
+    "mark": {
+     "type": "rule",
+     "strokeDash": [
+      3,
+      3
+     ],
+     "color": "#999"
+    },
+    "encoding": {
+     "y": {
+      "datum": 100,
+      "type": "quantitative",
+      "scale": {
+       "domain": [
+        50,
+        180
+       ]
+      }
+     }
+    }
+   },
+   {
+    "mark": {
+     "type": "line",
+     "strokeWidth": 3,
+     "point": {
+      "filled": true,
+      "size": 45
+     }
+    },
+    "encoding": {
+     "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null,
+      "axis": {
+       "labelAngle": 0,
+       "labelFontSize": 10,
+       "labelExpr": "slice(datum.value, 2)"
+      }
+     },
+     "y": {
+      "field": "idx",
+      "type": "quantitative",
+      "title": "Index (2021-22 = 100)",
+      "scale": {
+       "domain": [
+        50,
+        180
+       ]
+      },
+      "axis": {
+       "values": [
+        50,
+        100,
+        150
+       ],
+       "grid": true
+      }
+     },
+     "color": {
+      "field": "dir",
+      "type": "nominal",
+      "scale": {
+       "domain": [
+        "Grew",
+        "Fell"
+       ],
+       "range": [
+        "#178a94", "#c9801c"
+       ]
+      },
+      "legend": {
+       "title": "2024-25 vs 2021-22",
+       "orient": "top"
+      }
+     },
+     "tooltip": [
+      {
+       "field": "panel",
+       "title": "Measure"
+      },
+      {
+       "field": "year",
+       "title": "Year"
+      },
+      {
+       "field": "val",
+       "title": "Value",
+       "format": ","
+      },
+      {
+       "field": "idx",
+       "title": "Index",
+       "format": ".0f"
+      }
+     ]
+    }
+   },
+   {
+    "transform": [
+     {
+      "filter": "datum.year == '2024-25'"
+     },
+     {
+      "calculate": "format(datum.idx - 100, '+.0f') + '%'",
+      "as": "endtxt"
+     }
+    ],
+    "mark": {
+     "type": "text",
+     "fontSize": 13,
+     "fontWeight": "bold",
+     "dy": -12,
+     "align": "right"
+    },
+    "encoding": {
+     "x": {
+      "field": "year",
+      "type": "ordinal"
+     },
+     "y": {
+      "field": "idx",
+      "type": "quantitative",
+      "scale": {
+       "domain": [
+        50,
+        180
+       ]
+      }
+     },
+     "text": {
+      "field": "endtxt",
+      "type": "nominal"
+     },
+     "color": {
+      "field": "dir",
+      "type": "nominal",
+      "scale": {
+       "domain": [
+        "Grew",
+        "Fell"
+       ],
+       "range": [
+        "#178a94", "#c9801c"
+       ]
+      },
+      "legend": null
+     }
+    }
+   }
+  ]
+ },
  "config": {
   "font": "DM Sans",
   "view": {
