@@ -1,0 +1,281 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "Share of library visits made online, 2024-25",
+  "subtitle": "Darker means more visits online; the ACT is circled"
+ },
+ "width": "container",
+ "height": 300,
+ "projection": {
+  "type": "conicEqualArea",
+  "parallels": [
+   -18,
+   -36
+  ],
+  "rotate": [
+   -132,
+   0
+  ]
+ },
+ "layer": [
+  {
+   "data": {
+    "url": "data/australia_states.topojson",
+    "format": {
+     "type": "topojson",
+     "feature": "australia_states"
+    }
+   },
+   "transform": [
+    {
+     "lookup": "properties.STATE_NAME",
+     "from": {
+      "data": {
+       "url": "data/states.csv"
+      },
+      "key": "state_name",
+      "fields": [
+       "state",
+       "online_share"
+      ]
+     }
+    }
+   ],
+   "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1.2
+   },
+   "encoding": {
+    "color": {
+     "field": "online_share",
+     "type": "quantitative",
+     "title": "Online visits",
+     "scale": {
+      "type": "threshold",
+      "domain": [
+       0.35,
+       0.42,
+       0.5,
+       0.58
+      ],
+      "range": [
+       "#e8eaf8",
+       "#c1c7ee",
+       "#8f9ae0",
+       "#5b68c8",
+       "#33399a"
+      ]
+     },
+     "legend": {
+      "orient": "bottom",
+      "direction": "horizontal",
+      "format": ".0%",
+      "symbolType": "square",
+      "symbolSize": 70,
+      "labelFontSize": 10,
+      "titleFontSize": 10,
+      "titleFontWeight": 600,
+      "padding": 0,
+      "offset": 6,
+      "columnPadding": 8,
+      "titleAnchor": "start"
+     }
+    },
+    "tooltip": [
+     {
+      "field": "properties.STATE_NAME",
+      "title": "State"
+     },
+     {
+      "field": "online_share",
+      "title": "Online share of visits",
+      "format": ".1%"
+     }
+    ]
+   }
+  },
+  {
+   "data": {
+    "url": "data/australia_states.topojson",
+    "format": {
+     "type": "topojson",
+     "feature": "australia_states"
+    }
+   },
+   "transform": [
+    {
+     "lookup": "properties.STATE_NAME",
+     "from": {
+      "data": {
+       "url": "data/states.csv"
+      },
+      "key": "state_name",
+      "fields": [
+       "state",
+       "online_share",
+       "label_lon",
+       "label_lat"
+      ]
+     }
+    },
+    {
+     "filter": "datum.state != 'ACT'"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "fontWeight": "bold"
+   },
+   "encoding": {
+    "longitude": {
+     "field": "label_lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "label_lat",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "state"
+    },
+    "color": {
+     "condition": {
+      "test": "datum.online_share > 0.5",
+      "value": "white"
+     },
+     "value": "#1a1a1a"
+    }
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "transform": [
+    {
+     "filter": "datum.state == 'ACT'"
+    }
+   ],
+   "mark": {
+    "type": "circle",
+    "size": 150,
+    "stroke": "#1a1a1a",
+    "strokeWidth": 1.5
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "color": {
+     "field": "online_share",
+     "type": "quantitative",
+     "scale": {
+      "type": "threshold",
+      "domain": [
+       0.35,
+       0.42,
+       0.5,
+       0.58
+      ],
+      "range": [
+       "#e8eaf8",
+       "#c1c7ee",
+       "#8f9ae0",
+       "#5b68c8",
+       "#33399a"
+      ]
+     },
+     "legend": null
+    },
+    "tooltip": [
+     {
+      "field": "state_name",
+      "title": "State"
+     },
+     {
+      "field": "online_share",
+      "title": "Online share of visits",
+      "format": ".1%"
+     }
+    ]
+   }
+  },
+  {
+   "data": {
+    "url": "data/states.csv"
+   },
+   "transform": [
+    {
+     "filter": "datum.state == 'ACT'"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "fontWeight": "bold",
+    "align": "left",
+    "dx": 12,
+    "dy": 6,
+    "color": "#1a1a1a"
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "text": {
+     "value": "ACT 44%"
+    }
+   }
+  }
+ ],
+ "config": {
+  "font": "DM Sans",
+  "view": {
+   "stroke": null
+  },
+  "title": {
+   "font": "Playfair Display",
+   "fontSize": 17,
+   "fontWeight": 600,
+   "anchor": "start",
+   "offset": 12,
+   "subtitleFont": "DM Sans",
+   "subtitleFontSize": 13,
+   "subtitleColor": "#555",
+   "subtitlePadding": 4
+  },
+  "axis": {
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600,
+   "domainColor": "#bbb",
+   "tickColor": "#bbb",
+   "gridColor": "#eee",
+   "labelColor": "#333"
+  },
+  "legend": {
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
+   "labelFontSize": 12,
+   "titleFontSize": 12,
+   "titleFontWeight": 600
+  },
+  "text": {
+   "font": "DM Sans"
+  }
+ }
+}
