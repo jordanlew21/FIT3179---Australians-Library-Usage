@@ -2,7 +2,7 @@
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
   "text": "Visits in person and online, 2020-21 to 2024-25",
-  "subtitle": "Millions of visits a year; the path starts in the pandemic"
+  "subtitle": "Millions a year; still below the 2017-18 level"
  },
  "width": "container",
  "height": 320,
@@ -33,33 +33,41 @@
    "as": "wv"
   }
  ],
- "encoding": {
-  "x": {
-   "field": "p",
-   "type": "quantitative",
-   "title": "In-person visits (millions)",
-   "scale": {
-    "zero": false
-   }
-  },
-  "y": {
-   "field": "wv",
-   "type": "quantitative",
-   "title": "Website visits (millions)",
-   "scale": {
-    "zero": false
-   }
-  },
-  "order": {
-   "field": "year"
-  }
- },
  "layer": [
   {
    "mark": {
     "type": "line",
     "color": "#aaa",
     "strokeWidth": 2
+   },
+   "encoding": {
+    "x": {
+     "field": "p",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       46,
+       116
+      ],
+      "zero": false
+     },
+     "title": "In-person visits (millions)"
+    },
+    "y": {
+     "field": "wv",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       50,
+       76
+      ],
+      "zero": false
+     },
+     "title": "Website visits (millions)"
+    },
+    "order": {
+     "field": "year"
+    }
    }
   },
   {
@@ -67,12 +75,35 @@
     "type": "point",
     "filled": true,
     "size": 90,
-    "color": "#1f7a8c"
+    "color": "#1d3f66"
    },
    "encoding": {
+    "x": {
+     "field": "p",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       46,
+       116
+      ],
+      "zero": false
+     }
+    },
+    "y": {
+     "field": "wv",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       50,
+       76
+      ],
+      "zero": false
+     }
+    },
     "tooltip": [
      {
-      "field": "year"
+      "field": "year",
+      "title": "Year"
      },
      {
       "field": "p",
@@ -88,38 +119,257 @@
    }
   },
   {
+   "transform": [
+    {
+     "filter": "indexof(['2022-23','2024-25'], datum.year) >= 0"
+    }
+   ],
    "mark": {
     "type": "text",
+    "align": "center",
+    "dx": 0,
     "dy": -14,
     "fontSize": 12,
     "fontWeight": "bold"
    },
    "encoding": {
+    "x": {
+     "field": "p",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       46,
+       116
+      ],
+      "zero": false
+     }
+    },
+    "y": {
+     "field": "wv",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       50,
+       76
+      ],
+      "zero": false
+     }
+    },
     "text": {
      "field": "year"
     }
    }
+  },
+  {
+   "transform": [
+    {
+     "filter": "indexof(['2021-22'], datum.year) >= 0"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "align": "right",
+    "dx": -10,
+    "dy": 0,
+    "fontSize": 12,
+    "fontWeight": "bold"
+   },
+   "encoding": {
+    "x": {
+     "field": "p",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       46,
+       116
+      ],
+      "zero": false
+     }
+    },
+    "y": {
+     "field": "wv",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       50,
+       76
+      ],
+      "zero": false
+     }
+    },
+    "text": {
+     "field": "year"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "indexof(['2020-21'], datum.year) >= 0"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "dx": 10,
+    "dy": 4,
+    "fontSize": 12,
+    "fontWeight": "bold"
+   },
+   "encoding": {
+    "x": {
+     "field": "p",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       46,
+       116
+      ],
+      "zero": false
+     }
+    },
+    "y": {
+     "field": "wv",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       50,
+       76
+      ],
+      "zero": false
+     }
+    },
+    "text": {
+     "field": "year"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "indexof(['2023-24'], datum.year) >= 0"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "align": "center",
+    "dx": 0,
+    "dy": 18,
+    "fontSize": 12,
+    "fontWeight": "bold"
+   },
+   "encoding": {
+    "x": {
+     "field": "p",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       46,
+       116
+      ],
+      "zero": false
+     }
+    },
+    "y": {
+     "field": "wv",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       50,
+       76
+      ],
+      "zero": false
+     }
+    },
+    "text": {
+     "field": "year"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "x": 111.48,
+      "t": "Before the pandemic (2017-18): 111m"
+     }
+    ]
+   },
+   "layer": [
+    {
+     "mark": {
+      "type": "rule",
+      "strokeDash": [
+       5,
+       4
+      ],
+      "color": "#2b6cb0",
+      "strokeWidth": 2
+     },
+     "encoding": {
+      "x": {
+       "field": "x",
+       "type": "quantitative",
+       "scale": {
+        "domain": [
+         46,
+         116
+        ]
+       }
+      }
+     }
+    },
+    {
+     "mark": {
+      "type": "text",
+      "align": "right",
+      "dx": -8,
+      "fontSize": 12,
+      "fontWeight": "bold",
+      "color": "#2b6cb0",
+      "baseline": "top"
+     },
+     "encoding": {
+      "x": {
+       "field": "x",
+       "type": "quantitative",
+       "scale": {
+        "domain": [
+         46,
+         116
+        ]
+       }
+      },
+      "y": {
+       "value": 8
+      },
+      "text": {
+       "field": "t"
+      }
+     }
+    }
+   ]
   }
  ],
  "config": {
-  "font": "Open Sans",
+  "font": "DM Sans",
   "view": {
    "stroke": null
   },
   "title": {
-   "font": "Lora",
+   "font": "Playfair Display",
    "fontSize": 17,
    "fontWeight": 600,
    "anchor": "start",
    "offset": 12,
-   "subtitleFont": "Open Sans",
+   "subtitleFont": "DM Sans",
    "subtitleFontSize": 13,
    "subtitleColor": "#555",
    "subtitlePadding": 4
   },
   "axis": {
-   "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600,
@@ -129,14 +379,14 @@
    "labelColor": "#333"
   },
   "legend": {
-   "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600
   },
   "text": {
-   "font": "Open Sans"
+   "font": "DM Sans"
   }
  }
 }
