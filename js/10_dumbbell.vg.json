@@ -48,11 +48,55 @@
     "order": "descending"
    },
    "axis": {
-    "labelLimit": 280
+    "labelLimit": 280,
+    "labelFontWeight": {
+     "condition": {
+      "test": "datum.label == 'Libraries'",
+      "value": "bold"
+     },
+     "value": "normal"
+    },
+    "labelColor": {
+     "condition": {
+      "test": "datum.label == 'Libraries'",
+      "value": "#0b2f4a"
+     },
+     "value": "#333"
+    },
+    "labelFontSize": {
+     "condition": {
+      "test": "datum.label == 'Libraries'",
+      "value": 14
+     },
+     "value": 12
+    }
    }
   }
  },
  "layer": [
+  {
+   "transform": [
+    {
+     "filter": "datum.venue_or_activity == 'Libraries'"
+    }
+   ],
+   "mark": {
+    "type": "bar",
+    "color": "#fff0b3",
+    "height": {
+     "band": 1
+    }
+   },
+   "encoding": {
+    "x": {
+     "datum": 0,
+     "type": "quantitative"
+    },
+    "x2": {
+     "datum": 80
+    }
+   }
+  },
   {
    "mark": {
     "type": "rule",
@@ -82,8 +126,8 @@
        "Audience fell by about half"
       ],
       "range": [
-       "#2b8cbe",
-       "#08306b"
+       "#e0a040",
+       "#b8680a"
       ]
      },
      "legend": {
@@ -153,7 +197,7 @@
       ],
       "range": [
        "#999999",
-       "#d97b2c"
+       "#34506b"
       ]
      },
      "legend": {
@@ -200,7 +244,7 @@
     "type": "point",
     "filled": true,
     "size": 180,
-    "color": "#1f7a8c",
+    "color": "#0b2f4a",
     "shape": "diamond",
     "stroke": "#ffffff",
     "strokeWidth": 1.5
@@ -225,24 +269,24 @@
   }
  ],
  "config": {
-  "font": "Open Sans",
+  "font": "DM Sans",
   "view": {
    "stroke": null
   },
   "title": {
-   "font": "Lora",
+   "font": "Playfair Display",
    "fontSize": 17,
    "fontWeight": 600,
    "anchor": "start",
    "offset": 12,
-   "subtitleFont": "Open Sans",
+   "subtitleFont": "DM Sans",
    "subtitleFontSize": 13,
    "subtitleColor": "#555",
    "subtitlePadding": 4
   },
   "axis": {
-   "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600,
@@ -252,14 +296,14 @@
    "labelColor": "#333"
   },
   "legend": {
-   "labelFont": "Open Sans",
-   "titleFont": "Open Sans",
+   "labelFont": "DM Sans",
+   "titleFont": "DM Sans",
    "labelFontSize": 12,
    "titleFontSize": 12,
    "titleFontWeight": 600
   },
   "text": {
-   "font": "Open Sans"
+   "font": "DM Sans"
   }
  },
  "resolve": {
