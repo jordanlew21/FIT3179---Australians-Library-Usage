@@ -266,6 +266,35 @@
      }
     ]
    }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.venue_or_activity == 'Libraries'"
+    },
+    {
+     "calculate": "'Libraries: ' + format(datum.a,'.0f') + '% to ' + format(datum.b,'.0f') + '%, down a third'",
+     "as": "note"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "dx": 14,
+    "fontSize": 12,
+    "fontWeight": "bold",
+    "color": "#0b2f4a"
+   },
+   "encoding": {
+    "x": {
+     "field": "a",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "note",
+     "type": "nominal"
+    }
+   }
   }
  ],
  "config": {
