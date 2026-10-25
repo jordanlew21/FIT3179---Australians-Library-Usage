@@ -23,4 +23,4 @@ FIT3179 Data Visualisation 2. Author: Jordan Lew. Date: 26 October 2026.
 - Wi-Fi data is patchy and Queensland's reporting scope changed.
 
 ## AI use
-Claude (Anthropic) helped prepare CSV files, write and debug Vega-Lite specs and edit page text. The author chose the topic, sources and story and checked the figures.
+Claude (Anthropic) helped prepare CSV files, write and debug Vega-Lite specs and edit page text.
